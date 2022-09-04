@@ -2,6 +2,7 @@
 
 #include <includes.hpp>
 #include "../../../qbot/qbot.hpp"
+#include "../../../clickbot/clickbot.hpp"
 
 namespace Hooks::PlayLayer
 {

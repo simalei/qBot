@@ -45,7 +45,7 @@ namespace GUI
                     if (ImGui::Button("Save macro", {260.f, 24.f}))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_SaveDialog(&outPath, filter, 1, nullptr, qBot::levelName.c_str());
+                        nfdresult_t result = NFD_SaveDialog(&outPath, filter, 1, "qBot\\replays", qBot::levelName.c_str());
                         if (result == NFD_OKAY)
                         {
                             std::ofstream out(outPath, std::ios::binary);
@@ -58,7 +58,7 @@ namespace GUI
                     if (ImGui::Button("Load macro", {260.f, 24.f}))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_OpenDialog(&outPath, filter, 1, nullptr);
+                        nfdresult_t result = NFD_OpenDialog(&outPath, filter, 1, "qBot\\replays");
                         if (result == NFD_OKAY)
                         {
                             qBot::vanilaMacro.clear();
@@ -97,6 +97,12 @@ namespace GUI
                         FPSBypass::setFPS();
                     }
 
+                    ImGui::EndTabItem();
+                }
+                if (ImGui::BeginTabItem("Clickbot"))
+                {
+                    ImGui::Checkbox("Enabled", &Clickbot::enabled);
+                    ImGui::DragInt("P1 Click volume", &Clickbot::p1ClickVolume, 1, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp);
                     ImGui::EndTabItem();
                 }
                 if (ImGui::BeginTabItem("Settings"))

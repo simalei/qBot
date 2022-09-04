@@ -4,6 +4,7 @@
 
 #include "hooks/hooks.hpp"
 #include "gui/gui.hpp"
+#include "direct.h"
 
 DWORD MainThread(LPVOID lpParam)
 {
@@ -12,6 +13,10 @@ DWORD MainThread(LPVOID lpParam)
     SetConsoleTitle("qBot debug console");
     freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
     #endif
+
+    _mkdir("qBot");
+    _mkdir("qBot\\replays");
+    _mkdir("qBot\\clicks");
 
     MH_Initialize();
 

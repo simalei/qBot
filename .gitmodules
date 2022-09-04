@@ -13,12 +13,12 @@
 [submodule "libraries/imgui-hook"]
 	path = libraries/imgui-hook
 	url = https://github.com/oneparsec/imgui-hook
-[submodule "libraries/fmod-headers"]
-	path = libraries/fmod-headers
-	url = https://github.com/oneparsec/fmod-headers
 [submodule "libraries/cocos-headers"]
 	path = libraries/cocos-headers
 	url = https://github.com/HJFod/cocos-headers
 [submodule "libraries/gd.h"]
 	path = libraries/gd.h
 	url = https://github.com/HJFod/gd.h
+[submodule "libraries/irrklang-headers"]
+	path = libraries/irrklang-headers
+	url = https://github.com/oneparsec/irrklang-headers

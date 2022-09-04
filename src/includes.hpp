@@ -31,6 +31,9 @@
 #include <imgui_notify.h>
 #include <tahoma.h>
 
+// FMod
+#include <irrKlang.h>
+
 using namespace cocos2d;
 using namespace cocos2d::extension;
 

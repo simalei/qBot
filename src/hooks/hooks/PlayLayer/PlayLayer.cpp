@@ -6,7 +6,7 @@ namespace Hooks::PlayLayer
     {
         auto ret = init(self, GJGameLevel);
         if (!ret) {return ret;}
-        //std::cout << "PlayLayer::init has been called" << std::endl;
+        Clickbot::InitClickbot();
         qBot::Init(self);
         return ret;
     }
@@ -36,6 +36,7 @@ namespace Hooks::PlayLayer
 
     bool __fastcall hkPushButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
+        
         qBot::PushButton(self, player);
         return pushButton(self, state, player);
     }

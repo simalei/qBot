@@ -46,11 +46,16 @@ namespace qBot
 
                 if (std::get<0>(qBot::vanilaMacro[frame]) && !p1ButtonPushed)
                 {
+                    Clickbot::PushButton(true);
                     Hooks::PlayLayer::pushButton(self, 0, true);
+
                     p1ButtonPushed = true;
                 }
                 if (!std::get<0>(qBot::vanilaMacro[frame]) && p1ButtonPushed) {
+                    
+                    Clickbot::ReleaseButton(true);
                     Hooks::PlayLayer::releaseButton(self, 0, true);
+                    
                     p1ButtonPushed = false;
                 }
 
@@ -59,11 +64,16 @@ namespace qBot
 
                 if (std::get<1>(qBot::vanilaMacro[frame]) && !p2ButtonPushed)
                 {
+                    Clickbot::PushButton(false);
                     Hooks::PlayLayer::pushButton(self, 0, false);
+                    
                     p2ButtonPushed = true;
                 }
                 if (!std::get<1>(qBot::vanilaMacro[frame]) && p2ButtonPushed) {
+                    
+                    Clickbot::ReleaseButton(false);
                     Hooks::PlayLayer::releaseButton(self, 0, false);
+
                     p2ButtonPushed = false;
                 }
             }
@@ -81,6 +91,7 @@ namespace qBot
                 p2ButtonPushed = true;
             }
         }
+        
     }
 
     void ReleaseButton(gd::PlayLayer* self, bool player)

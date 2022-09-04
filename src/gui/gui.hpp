@@ -7,6 +7,7 @@
 #include "../qbot/qbot.hpp"
 #include "../hooks/hooks/Speedhack/Speedhack.hpp"
 #include "../hooks/hooks/FPSBypass/FPSBypass.hpp"
+#include "../clickbot/clickbot.hpp"
 
 namespace GUI
 {
