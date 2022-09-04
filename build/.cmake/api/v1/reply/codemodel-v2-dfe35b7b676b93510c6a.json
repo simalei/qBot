@@ -1,0 +1,1128 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						9
+					]
+				},
+				{
+					"build" : "libraries/minhook",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.minhook-Debug-e3f021a175a4d0ad380d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "libraries/minhook",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "libraries/imgui-hook",
+					"jsonFile" : "directory-libraries.imgui-hook-Debug-52c11f6a91eac53c838c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "libraries/imgui-hook",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "libraries/cocos-headers",
+					"jsonFile" : "directory-libraries.cocos-headers-Debug-478791ff6354370498a7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "libraries/cocos-headers",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended-Debug-675130d9ef4e8ebdc20c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended.src-Debug-2735fb71ff47a4f90762.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended/src",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "libraries/fmod-headers",
+					"jsonFile" : "directory-libraries.fmod-headers-Debug-c0d171bc3de4efc20d73.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "libraries/fmod-headers",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2
+					],
+					"name" : "qBot",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						6,
+						9
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "minhook",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "cocos-headers",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5
+					],
+					"name" : "nativefiledialog-extended",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "fmod",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-39081840fc18a0f73b71.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@7605efca7753b9cb6432",
+					"jsonFile" : "target-ALL_BUILD-Debug-87ebffe5f73012cceeae.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@aaf74036f3bba581c610",
+					"jsonFile" : "target-ALL_BUILD-Debug-6fb7718d01cfb648724c.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9bc592cb78f592902bc8",
+					"jsonFile" : "target-ALL_BUILD-Debug-c161ffac871e7bdf13b3.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "ALL_BUILD::@6723526aaddad819250f",
+					"jsonFile" : "target-ALL_BUILD-Debug-9f1befb4b4613e31b60f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-839a71644445b9a7953a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "imgui-hook::@855b64ca8e5c39f28ff5",
+					"jsonFile" : "target-imgui-hook-Debug-f3e97e2ee16a1c754719.json",
+					"name" : "imgui-hook",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "minhook::@7605efca7753b9cb6432",
+					"jsonFile" : "target-minhook-Debug-0fc459c798f7f6cbd78f.json",
+					"name" : "minhook",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "nfd::@bc225e99e6bab20113bf",
+					"jsonFile" : "target-nfd-Debug-eda0437fb6d6107db97d.json",
+					"name" : "nfd",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qBot::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qBot-Debug-6d0dc900bf8119c1fe89.json",
+					"name" : "qBot",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						9
+					]
+				},
+				{
+					"build" : "libraries/minhook",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.minhook-Release-2d5e442dc825d39c16aa.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "libraries/minhook",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "libraries/imgui-hook",
+					"jsonFile" : "directory-libraries.imgui-hook-Release-52c11f6a91eac53c838c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "libraries/imgui-hook",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "libraries/cocos-headers",
+					"jsonFile" : "directory-libraries.cocos-headers-Release-478791ff6354370498a7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "libraries/cocos-headers",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended-Release-675130d9ef4e8ebdc20c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended.src-Release-bf862d535a3f4b5ef809.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended/src",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "libraries/fmod-headers",
+					"jsonFile" : "directory-libraries.fmod-headers-Release-c0d171bc3de4efc20d73.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "libraries/fmod-headers",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2
+					],
+					"name" : "qBot",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						6,
+						9
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "minhook",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "cocos-headers",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5
+					],
+					"name" : "nativefiledialog-extended",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "fmod",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-39081840fc18a0f73b71.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@7605efca7753b9cb6432",
+					"jsonFile" : "target-ALL_BUILD-Release-87ebffe5f73012cceeae.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@aaf74036f3bba581c610",
+					"jsonFile" : "target-ALL_BUILD-Release-6fb7718d01cfb648724c.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9bc592cb78f592902bc8",
+					"jsonFile" : "target-ALL_BUILD-Release-c161ffac871e7bdf13b3.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "ALL_BUILD::@6723526aaddad819250f",
+					"jsonFile" : "target-ALL_BUILD-Release-9f1befb4b4613e31b60f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-839a71644445b9a7953a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "imgui-hook::@855b64ca8e5c39f28ff5",
+					"jsonFile" : "target-imgui-hook-Release-f4eaf02b43e2e135057a.json",
+					"name" : "imgui-hook",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "minhook::@7605efca7753b9cb6432",
+					"jsonFile" : "target-minhook-Release-3c7e76c16b484ce85a35.json",
+					"name" : "minhook",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "nfd::@bc225e99e6bab20113bf",
+					"jsonFile" : "target-nfd-Release-77db3fdf3410a93b8a45.json",
+					"name" : "nfd",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qBot::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qBot-Release-48aa4ca9d33cd9c9e6b0.json",
+					"name" : "qBot",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-MinSizeRel-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						9
+					]
+				},
+				{
+					"build" : "libraries/minhook",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.minhook-MinSizeRel-7b04c77f5bfe430df90c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "libraries/minhook",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "libraries/imgui-hook",
+					"jsonFile" : "directory-libraries.imgui-hook-MinSizeRel-52c11f6a91eac53c838c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "libraries/imgui-hook",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "libraries/cocos-headers",
+					"jsonFile" : "directory-libraries.cocos-headers-MinSizeRel-478791ff6354370498a7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "libraries/cocos-headers",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended-MinSizeRel-675130d9ef4e8ebdc20c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended.src-MinSizeRel-64831b01da2aa1be67ad.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended/src",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "libraries/fmod-headers",
+					"jsonFile" : "directory-libraries.fmod-headers-MinSizeRel-c0d171bc3de4efc20d73.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "libraries/fmod-headers",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "MinSizeRel",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2
+					],
+					"name" : "qBot",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						6,
+						9
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "minhook",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "cocos-headers",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5
+					],
+					"name" : "nativefiledialog-extended",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "fmod",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-39081840fc18a0f73b71.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@7605efca7753b9cb6432",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-87ebffe5f73012cceeae.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@aaf74036f3bba581c610",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-6fb7718d01cfb648724c.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9bc592cb78f592902bc8",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-c161ffac871e7bdf13b3.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "ALL_BUILD::@6723526aaddad819250f",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-9f1befb4b4613e31b60f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-839a71644445b9a7953a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "imgui-hook::@855b64ca8e5c39f28ff5",
+					"jsonFile" : "target-imgui-hook-MinSizeRel-eee5a6bcb7beefe5e3c2.json",
+					"name" : "imgui-hook",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "minhook::@7605efca7753b9cb6432",
+					"jsonFile" : "target-minhook-MinSizeRel-d72c95c60e395f07b7b9.json",
+					"name" : "minhook",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "nfd::@bc225e99e6bab20113bf",
+					"jsonFile" : "target-nfd-MinSizeRel-e33f67370b807cae4706.json",
+					"name" : "nfd",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qBot::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qBot-MinSizeRel-be05162f79abc21fb848.json",
+					"name" : "qBot",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						9
+					]
+				},
+				{
+					"build" : "libraries/minhook",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.minhook-RelWithDebInfo-6781a8ce7bdc6c42e0ab.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "libraries/minhook",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "libraries/imgui-hook",
+					"jsonFile" : "directory-libraries.imgui-hook-RelWithDebInfo-52c11f6a91eac53c838c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "libraries/imgui-hook",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "libraries/cocos-headers",
+					"jsonFile" : "directory-libraries.cocos-headers-RelWithDebInfo-478791ff6354370498a7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "libraries/cocos-headers",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended-RelWithDebInfo-675130d9ef4e8ebdc20c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "libraries/nfd-extended/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-libraries.nfd-extended.src-RelWithDebInfo-4ee06153f0c3326e671d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 3,
+					"source" : "libraries/nfd-extended/src",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "libraries/fmod-headers",
+					"jsonFile" : "directory-libraries.fmod-headers-RelWithDebInfo-c0d171bc3de4efc20d73.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "libraries/fmod-headers",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2
+					],
+					"name" : "qBot",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						6,
+						9
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "minhook",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "cocos-headers",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5
+					],
+					"name" : "nativefiledialog-extended",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "fmod",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-39081840fc18a0f73b71.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@7605efca7753b9cb6432",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-87ebffe5f73012cceeae.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@aaf74036f3bba581c610",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-6fb7718d01cfb648724c.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9bc592cb78f592902bc8",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-c161ffac871e7bdf13b3.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "ALL_BUILD::@6723526aaddad819250f",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-9f1befb4b4613e31b60f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-839a71644445b9a7953a.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "imgui-hook::@855b64ca8e5c39f28ff5",
+					"jsonFile" : "target-imgui-hook-RelWithDebInfo-2522915d0b6d3baf7c02.json",
+					"name" : "imgui-hook",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "minhook::@7605efca7753b9cb6432",
+					"jsonFile" : "target-minhook-RelWithDebInfo-5c264802e68706813998.json",
+					"name" : "minhook",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "nfd::@bc225e99e6bab20113bf",
+					"jsonFile" : "target-nfd-RelWithDebInfo-4a7df0709802f0a4ed42.json",
+					"name" : "nfd",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qBot::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qBot-RelWithDebInfo-88eaa1a56b10a198c88d.json",
+					"name" : "qBot",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/asimo/Desktop/qBot/build",
+		"source" : "C:/Users/asimo/Desktop/qBot"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

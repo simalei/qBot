@@ -1,0 +1,24 @@
+[submodule "libraries/minhook"]
+	path = libraries/minhook
+	url = https://github.com/TsudaKageyu/minhook
+[submodule "libraries/nfd-extended"]
+	path = libraries/nfd-extended
+	url = https://github.com/btzy/nativefiledialog-extended
+[submodule "libraries/imgui-notify"]
+	path = libraries/imgui-notify
+	url = https://github.com/patrickcjk/imgui-notify
+[submodule "libraries/imgui"]
+	path = libraries/imgui
+	url = https://github.com/ocornut/imgui
+[submodule "libraries/imgui-hook"]
+	path = libraries/imgui-hook
+	url = https://github.com/oneparsec/imgui-hook
+[submodule "libraries/fmod-headers"]
+	path = libraries/fmod-headers
+	url = https://github.com/oneparsec/fmod-headers
+[submodule "libraries/cocos-headers"]
+	path = libraries/cocos-headers
+	url = https://github.com/HJFod/cocos-headers
+[submodule "libraries/gd.h"]
+	path = libraries/gd.h
+	url = https://github.com/HJFod/gd.h
