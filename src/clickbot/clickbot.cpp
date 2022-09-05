@@ -4,14 +4,20 @@
 #include <chrono>
 
 namespace fs = std::filesystem;
-using namespace irrklang;
 
 namespace Clickbot
 {
 
     bool enabled = false;
+    bool initialized = false;
     int p1ClickVolume = 100;
     int p2ClickVolume = 100;
+
+    FMOD::Channel* pushChannel;
+    FMOD::Channel* releaseChannel;
+    FMOD::Sound* pushSound;
+    FMOD::Sound* releaseSound;
+    
 
     std::string pickRandomSound(std::string path)
     {
@@ -25,20 +31,19 @@ namespace Clickbot
 
     void InitClickbot()
     {
-        Clickbot::engine = createIrrKlangDevice();
+        
     }
 
     void PushButton(bool player)
     {
         if (enabled)
         {
+            auto system = gd::FMODAudioEngine::sharedEngine()->m_pSystem;
             std::string path = pickRandomSound("clicks\\pushes");
-            
-            ISound* sound = engine->play2D(path.c_str(), false, true, false);
-            sound->setVolume(p1ClickVolume / (float)100);
-            sound->setIsPaused(false);
-            sound->drop();
-            
+
+            system->createSound(path.c_str(), FMOD_DEFAULT, nullptr, &pushSound);
+            system->playSound(pushSound, nullptr, false, &pushChannel);
+            system->update();
         }
     }
 
@@ -46,12 +51,12 @@ namespace Clickbot
     {
         if (enabled)
         {
+            auto system = gd::FMODAudioEngine::sharedEngine()->m_pSystem;
             std::string path = pickRandomSound("clicks\\releases");
 
-            ISound* sound = engine->play2D(path.c_str(), false, true, false);
-            sound->setVolume(p1ClickVolume / (float)100);
-            sound->setIsPaused(false);
-            sound->drop();
+            system->createSound(path.c_str(), FMOD_DEFAULT, nullptr, &releaseSound);
+            system->playSound(releaseSound, nullptr, false, &releaseChannel);
+            system->update();
         }
         
     }

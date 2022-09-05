@@ -8,7 +8,7 @@ namespace qBot
 
     bool p1ButtonPushed = false;
     bool p2ButtonPushed = false;
-    std::vector<std::tuple<bool, bool, float, float>> vanilaMacro;
+    std::vector<std::tuple<bool, bool, float, float, float, float, float, float, double, double, double, double, double, double, double, double>> vanilaMacro;
     std::vector<int> checkpoints;
     std::string levelName = "";
     
@@ -32,7 +32,19 @@ namespace qBot
                 p1ButtonPushed,
                 p2ButtonPushed,
                 self->m_pPlayer1->getPositionX(),
-                self->m_pPlayer2->getPositionX()
+                self->m_pPlayer2->getPositionX(),
+                self->m_pPlayer1->getPositionY(),
+                self->m_pPlayer2->getPositionY(),
+                self->m_pPlayer1->getRotation(),
+                self->m_pPlayer2->getRotation(),
+                self->m_pPlayer1->m_yAccel,
+                self->m_pPlayer2->m_yAccel,
+                self->m_pPlayer1->m_xAccel,
+                self->m_pPlayer2->m_xAccel,
+                self->m_pPlayer1->m_jumpAccel,
+                self->m_pPlayer2->m_jumpAccel,
+                self->m_pPlayer1->m_gravity,
+                self->m_pPlayer2->m_gravity
                 });
             }
         }
@@ -41,41 +53,61 @@ namespace qBot
         {
             if (frame != 0 && vanilaMacro.size() > (size_t)frame)
             {
-                
-                self->m_pPlayer1->setPositionX(std::get<2>(qBot::vanilaMacro[frame - 1]));
-
-                if (std::get<0>(qBot::vanilaMacro[frame]) && !p1ButtonPushed)
+                if (self->m_pPlayer1)
                 {
-                    Clickbot::PushButton(true);
-                    Hooks::PlayLayer::pushButton(self, 0, true);
-
-                    p1ButtonPushed = true;
-                }
-                if (!std::get<0>(qBot::vanilaMacro[frame]) && p1ButtonPushed) {
+                    self->m_pPlayer1->setPositionX(std::get<2>(qBot::vanilaMacro[frame - 1]));
+                    self->m_pPlayer1->setPositionY(std::get<4>(qBot::vanilaMacro[frame - 1]));
+                    self->m_pPlayer1->setRotation(std::get<6>(qBot::vanilaMacro[frame - 1]));
+                    self->m_pPlayer1->m_yAccel = std::get<8>(qBot::vanilaMacro[frame - 1]);
+                    self->m_pPlayer1->m_xAccel = std::get<10>(qBot::vanilaMacro[frame - 1]);
+                    self->m_pPlayer1->m_jumpAccel = std::get<12>(qBot::vanilaMacro[frame - 1]);
+                    self->m_pPlayer1->m_gravity = std::get<14>(qBot::vanilaMacro[frame - 1]);
                     
-                    Clickbot::ReleaseButton(true);
-                    Hooks::PlayLayer::releaseButton(self, 0, true);
-                    
-                    p1ButtonPushed = false;
+
+                    if (std::get<0>(qBot::vanilaMacro[frame]) && !p1ButtonPushed)
+                    {
+                        Clickbot::PushButton(true);
+                        Hooks::PlayLayer::pushButton(self, 0, true);
+
+                        p1ButtonPushed = true;
+                    }
+                    if (!std::get<0>(qBot::vanilaMacro[frame]) && p1ButtonPushed) {
+                        
+                        Clickbot::ReleaseButton(true);
+                        Hooks::PlayLayer::releaseButton(self, 0, true);
+                        
+                        p1ButtonPushed = false;
+                    }
                 }
 
-                
-                self->m_pPlayer2->setPositionX(std::get<3>(qBot::vanilaMacro[frame - 1]));
 
-                if (std::get<1>(qBot::vanilaMacro[frame]) && !p2ButtonPushed)
+                if (self->m_pPlayer2)
                 {
-                    Clickbot::PushButton(false);
-                    Hooks::PlayLayer::pushButton(self, 0, false);
-                    
-                    p2ButtonPushed = true;
-                }
-                if (!std::get<1>(qBot::vanilaMacro[frame]) && p2ButtonPushed) {
-                    
-                    Clickbot::ReleaseButton(false);
-                    Hooks::PlayLayer::releaseButton(self, 0, false);
+                    self->m_pPlayer2->setPositionX(std::get<3>(qBot::vanilaMacro[frame - 1]));
+                    self->m_pPlayer2->setPositionY(std::get<5>(qBot::vanilaMacro[frame - 1]));
+                    self->m_pPlayer2->setRotation(std::get<7>(qBot::vanilaMacro[frame - 1]));
+                    self->m_pPlayer2->m_yAccel = std::get<9>(qBot::vanilaMacro[frame - 1]);
+                    self->m_pPlayer2->m_xAccel = std::get<11>(qBot::vanilaMacro[frame - 1]);
+                    self->m_pPlayer2->m_jumpAccel = std::get<13>(qBot::vanilaMacro[frame - 1]);
+                    self->m_pPlayer2->m_gravity = std::get<15>(qBot::vanilaMacro[frame - 1]);
 
-                    p2ButtonPushed = false;
+
+                    if (std::get<1>(qBot::vanilaMacro[frame]) && !p2ButtonPushed)
+                    {
+                        Clickbot::PushButton(false);
+                        Hooks::PlayLayer::pushButton(self, 0, false);
+                        
+                        p2ButtonPushed = true;
+                    }
+                    if (!std::get<1>(qBot::vanilaMacro[frame]) && p2ButtonPushed) {
+                        
+                        Clickbot::ReleaseButton(false);
+                        Hooks::PlayLayer::releaseButton(self, 0, false);
+
+                        p2ButtonPushed = false;
+                    }
                 }
+
             }
         }
     }

@@ -7,7 +7,7 @@
 
 namespace qBot
 {
-    extern std::vector<std::tuple<bool, bool, float, float>> vanilaMacro;
+    extern std::vector<std::tuple<bool, bool, float, float, float, float, float, float, double, double, double, double, double, double, double, double>> vanilaMacro;
     extern std::vector<int> checkpoints;
     extern int frame;
     extern float xpos;

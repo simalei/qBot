@@ -1,6 +1,6 @@
 #pragma once
 #define QBOT_DEVMODE
-#define SAMPLE std::tuple<bool, bool, float, float>
+#define SAMPLE std::tuple<bool, bool, float, float, float, float, float, float, double, double, double, double, double, double, double, double>
 
 #include <includes.hpp>
 #include <fstream>

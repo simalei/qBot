@@ -16,6 +16,5 @@ namespace Clickbot
 
     std::string pickRandomSound(std::string path);
 
-    static inline irrklang::ISoundEngine* engine;
 
 } // namespace Clickbot

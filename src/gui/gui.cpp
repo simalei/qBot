@@ -102,7 +102,10 @@ namespace GUI
                 if (ImGui::BeginTabItem("Clickbot"))
                 {
                     ImGui::Checkbox("Enabled", &Clickbot::enabled);
-                    ImGui::DragInt("P1 Click volume", &Clickbot::p1ClickVolume, 1, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp);
+                    
+                    
+                    
+                    // ImGui::DragInt("P1 Click volume", &Clickbot::p1ClickVolume, 1, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp);
                     ImGui::EndTabItem();
                 }
                 if (ImGui::BeginTabItem("Settings"))

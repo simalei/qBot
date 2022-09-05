@@ -30,7 +30,7 @@ add_subdirectory(libraries/minhook)
 add_subdirectory(libraries/imgui-hook)
 add_subdirectory(libraries/cocos-headers)
 add_subdirectory(libraries/nfd-extended)
-add_subdirectory(libraries/irrklang-headers)
+add_subdirectory(libraries/fmod-headers)
 
 
 target_link_libraries(${PROJECT_NAME}
@@ -40,5 +40,5 @@ target_link_libraries(${PROJECT_NAME}
 	opengl32
 	cocos2d
 	nfd
-	irrKlang
+	fmod
 )

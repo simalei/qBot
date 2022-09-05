@@ -32,7 +32,8 @@
 #include <tahoma.h>
 
 // FMod
-#include <irrKlang.h>
+#include <fmod.hpp>
+#include <fmod.h>
 
 using namespace cocos2d;
 using namespace cocos2d::extension;

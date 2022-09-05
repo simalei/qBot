@@ -6,7 +6,6 @@ namespace Hooks::PlayLayer
     {
         auto ret = init(self, GJGameLevel);
         if (!ret) {return ret;}
-        Clickbot::InitClickbot();
         qBot::Init(self);
         return ret;
     }
