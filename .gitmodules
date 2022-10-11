@@ -19,6 +19,3 @@
 [submodule "libraries/gd.h"]
 	path = libraries/gd.h
 	url = https://github.com/HJFod/gd.h
-[submodule "libraries/fmod-headers"]
-	path = libraries/fmod-headers
-	url = https://github.com/oneparsec/fmod-headers

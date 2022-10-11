@@ -1,13 +1,13 @@
 #pragma once
 #define QBOT_DEVMODE
-#define SAMPLE std::tuple<bool, bool, float, float, float, float, float, float, double, double, double, double, double, double, double, double>
+#define SAMPLE std::tuple<bool, bool, float, float, float, float, float, float, double, double, bool, bool>
 
 #include <includes.hpp>
 #include <fstream>
 #include "../qbot/qbot.hpp"
 #include "../hooks/hooks/Speedhack/Speedhack.hpp"
 #include "../hooks/hooks/FPSBypass/FPSBypass.hpp"
-#include "../clickbot/clickbot.hpp"
+#include "../hooks/hooks/FPSMultiplier/FPSMultiplier.hpp"
 
 namespace GUI
 {
@@ -22,11 +22,11 @@ namespace GUI
         void render();
     }
 
-    namespace DebugWindow
+    namespace ClickbotWindow
     {
         void render();
     }
-
+    
     namespace Notifications
     {
         void render();

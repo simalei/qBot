@@ -2,10 +2,16 @@
 
 #include <includes.hpp>
 #include "../../../qbot/qbot.hpp"
-#include "../../../clickbot/clickbot.hpp"
 
 namespace Hooks::PlayLayer
 {
+    extern bool lockDeltaEnabled;
+    extern bool ignoreUserInputEnabled;
+    extern bool dualClickEnabled;
+
+    inline bool(__thiscall* init)(gd::PlayLayer* self, void* GJGameLevel);
+    bool __fastcall hkInit(gd::PlayLayer* self, int edx, void* GJGameLevel);
+
     inline void(__thiscall* update)(gd::PlayLayer* self, float delta);
     void __fastcall hkUpdate(gd::PlayLayer* self, void*, float delta);
     
@@ -14,9 +20,6 @@ namespace Hooks::PlayLayer
     
     inline int(__thiscall* death)(gd::PlayLayer* self, void* go, void* powerrangers);
     int __fastcall hkDeath(gd::PlayLayer* self, void*, void* go, void* powerrangers);
-    
-    inline bool(__thiscall* init)(gd::PlayLayer* self, void* GJGameLevel);
-    bool __fastcall hkInit(gd::PlayLayer* self, int edx, void* GJGameLevel);
     
     inline void(__thiscall* onQuit)(gd::PlayLayer* self);
 	void __fastcall hkOnQuit(gd::PlayLayer* self);

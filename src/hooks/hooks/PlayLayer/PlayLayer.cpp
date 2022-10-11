@@ -2,22 +2,36 @@
 
 namespace Hooks::PlayLayer
 {
+    bool lockDeltaEnabled = true;
+    bool ignoreUserInputEnabled = false;
+    bool dualClickEnabled = false;
+
     bool __fastcall hkInit(gd::PlayLayer* self, int edx, void* GJGameLevel)
     {
-        auto ret = init(self, GJGameLevel);
-        if (!ret) {return ret;}
+        PlayLayer::init(self, GJGameLevel);
+        std::cout << "playlayer initialized" << std::endl;
         qBot::Init(self);
-        return ret;
+        
+        
+
+
+        return true;
     }
 
     void __fastcall hkUpdate(gd::PlayLayer* self, void*, float delta)
-    {
-        update(self, delta);
+    {      
+        if (lockDeltaEnabled && GUI::mode == 2)
+        {
+            update(self, 1 / FPSMultiplier::target_fps);
+        } else {
+            update(self, delta);
+        }
         qBot::Update(self);
     }
 
     int __fastcall hkDeath(gd::PlayLayer* self, void*, void* go, void* powerrangers)
     {
+        qBot::Death();
         return death(self, go, powerrangers);
     }
     
@@ -29,20 +43,38 @@ namespace Hooks::PlayLayer
 
     int __fastcall hkResetLevel(gd::PlayLayer* self)
     {
+        qBot::frame = 0;
+        resetLevel(self);
         qBot::Reset(self);
-        return resetLevel(self);
+        return 0;
     }
 
     bool __fastcall hkPushButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
-        
         qBot::PushButton(self, player);
+        if (ignoreUserInputEnabled && GUI::mode == 2)
+        {
+            return true;
+        }
+        if (dualClickEnabled)
+        {
+            pushButton(self, state, !player);
+        }
         return pushButton(self, state, player);
     }
 
     bool __fastcall hkReleaseButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
         qBot::ReleaseButton(self, player);
+        if (ignoreUserInputEnabled && GUI::mode == 2)
+        {
+            return true;
+        }
+        if (dualClickEnabled)
+        {
+            releaseButton(self, state, !player);
+        }
+        
         return releaseButton(self, state, player);
     }
 

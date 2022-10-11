@@ -2,8 +2,12 @@
 
 namespace GUI
 {
+    ImVec2 buttonSize = {282.f, 24.f};
+    ImVec2 mainWindowPos;
     bool visible = false;
+
     bool demoWindow = false;
+    bool clickbotWindow = false;
     int mode = 0;
     nfdfilteritem_t filter[] = {{"qBot replay file", "dat"}};
 
@@ -11,21 +15,17 @@ namespace GUI
     {
         void render()
         {
-            ImGui::Begin("qBot dev-release", nullptr, ImGuiWindowFlags_NoResize);
-            ImGui::SetWindowSize({279,281});
+            ImGui::Begin("qBot", nullptr, ImGuiWindowFlags_NoResize);
+            ImGui::SetWindowSize({300,280});
+            mainWindowPos = ImGui::GetWindowPos();
 
             if (ImGui::BeginTabBar("MainTabBar"))
             {
-                if (ImGui::BeginTabItem("qBot"))
+                if (ImGui::BeginTabItem("General"))
                 {
-                    ImGui::RadioButton("Disabled", &mode, 0);
-                    ImGui::SameLine();
-                    ImGui::RadioButton("Record", &mode, 1);
-                    ImGui::SameLine();
-                    ImGui::RadioButton("Playback", &mode, 2);
+                    ImGui::Combo("Mode", &mode, "Disabled\0Record\0Playback");
 
                     ImGui::Separator();
-
 
                     ImGui::Text("Frame:");
                     ImGui::SameLine();
@@ -42,23 +42,22 @@ namespace GUI
 
                     ImGui::Separator();
                     
-                    if (ImGui::Button("Save macro", {260.f, 24.f}))
+                    if (ImGui::Button("Save macro", buttonSize))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_SaveDialog(&outPath, filter, 1, "qBot\\replays", qBot::levelName.c_str());
+                        nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 1, "qBot\\replays", qBot::levelName.c_str());
                         if (result == NFD_OKAY)
                         {
                             std::ofstream out(outPath, std::ios::binary);
                             out.write((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*qBot::vanilaMacro.size());
                             ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully saved to %s", outPath});
-                            FPSBypass::setFPS();
                         }
                     }
                     
-                    if (ImGui::Button("Load macro", {260.f, 24.f}))
+                    if (ImGui::Button("Load macro", buttonSize))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_OpenDialog(&outPath, filter, 1, "qBot\\replays");
+                        nfdresult_t result = NFD_OpenDialogU8(&outPath, filter, 1, "qBot\\replays");
                         if (result == NFD_OKAY)
                         {
                             qBot::vanilaMacro.clear();
@@ -68,22 +67,21 @@ namespace GUI
                             in.seekg(0);
                             in.read((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*count);
                             ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay %s successfully loaded", outPath});
-                            FPSBypass::setFPS();
                         }   
                     }
                     
-                    if (ImGui::Button("Clear macro", {260.f, 24.f}))
+                    if (ImGui::Button("Clear macro", buttonSize))
                     {
                         qBot::vanilaMacro.clear();
                     }
 
                     ImGui::EndTabItem();
                 }
-                if (ImGui::BeginTabItem("Utilities"))
+                if (ImGui::BeginTabItem("Assist"))
                 {
                     ImGui::Text("Speedhack");
                     ImGui::InputFloat("Speed", &Speedhack::target_speed);
-                    if (ImGui::Button("Apply speed", {260.f, 24.f}))
+                    if (ImGui::Button("Apply speed", buttonSize))
                     {
                         Speedhack::setSpeed();
                     }
@@ -91,90 +89,65 @@ namespace GUI
                     ImGui::Separator();
 
                     ImGui::Text("FPS Bypass");
-                    ImGui::InputInt("FPS", &FPSBypass::target_fps, 10);
-                    if (ImGui::Button("Apply FPS", {260.f, 24.f}))
+                    ImGui::InputFloat("FPS", &FPSBypass::target_fps, 10);
+                    if (ImGui::Button("Apply FPS", buttonSize))
                     {
                         FPSBypass::setFPS();
                     }
 
                     ImGui::EndTabItem();
                 }
-                if (ImGui::BeginTabItem("Clickbot"))
-                {
-                    ImGui::Checkbox("Enabled", &Clickbot::enabled);
-                    
-                    
-                    
-                    // ImGui::DragInt("P1 Click volume", &Clickbot::p1ClickVolume, 1, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp);
-                    ImGui::EndTabItem();
-                }
                 if (ImGui::BeginTabItem("Settings"))
+                {
+
+
+                    ImGui::Checkbox("Accuracy fix", &qBot::accuracyFixEnabled);
+                    ImGui::Checkbox("FPS multiplier", &FPSMultiplier::enabled);
+                    ImGui::Checkbox("Lock delta while replaying", &Hooks::PlayLayer::lockDeltaEnabled);
+                    ImGui::Checkbox("Ignore user input", &Hooks::PlayLayer::ignoreUserInputEnabled);
+                    ImGui::Checkbox("Dual click", &Hooks::PlayLayer::dualClickEnabled);
+                    ImGui::Checkbox("Show status", &qBot::showStatusEnabled);
+                    ImGui::Checkbox("Fake cheat indicator", &qBot::fakeCheatIndicatorEnabled);
+                    
+                    
+                    ImGui::EndTabItem();
+
+                }
+
+                if (ImGui::BeginTabItem("About"))
                 {
                     ImGui::Text("qBot by");
                     ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Aryie", ImGui::GetVersion());
+                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "adarift");
 
-                    ImGui::Text("ImGui version:", ImGui::GetVersion());
+                    ImGui::Text("qBot version:");
+                    ImGui::SameLine();
+                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "dev-release");
+
+                    ImGui::Text("ImGui version:");
                     ImGui::SameLine();
                     ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", ImGui::GetVersion());
 
                     ImGui::Separator();
 
-                    ImGui::Text("Restart level");
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "\tR");
-
-                    ImGui::Text("Toggle frame advance");
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "\tF");
-
-                    ImGui::Text("Advance one frame");
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "\tC");
-
-
                     ImGui::EndTabItem();
-
                 }
-                
                 
                 ImGui::EndTabBar();
             }
             
             ImGui::End();
+
+        
         }
     } // namespace MainWindow
-
-    namespace DebugWindow
-    {
-        void render()
-        {
-            ImGui::Begin("Debug");
-            if (ImGui::Button("Print mode"))
-            {
-                std::cout << mode << std::endl;
-            }
-            if (ImGui::Button("Print Frame"))
-            {
-                std::cout << qBot::frame << std::endl;
-            }
-            ImGui::Checkbox("Show demo window", &demoWindow);
-
-            if (ImGui::Button("inLevel?"))
-            {
-                std::cout << qBot::inLevel << std::endl;
-            }
-            
-            
-        }
-    } // namespace DebugWindow
     
     namespace Notifications
     {
         void render()
         {
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.f);
-            ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(43.f / 255.f, 43.f / 255.f, 43.f / 255.f, 100.f / 255.f));
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 7.f);
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.10f, 0.10f, 0.10f, 1.00f));
             ImGui::RenderNotifications();
             ImGui::PopStyleVar(1); // Don't forget to Pop()
             ImGui::PopStyleColor(1);
@@ -245,6 +218,7 @@ namespace GUI
         colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(1.00f, 0.00f, 0.00f, 0.35f);
         ImGuiStyle& style = ImGui::GetStyle();
         style.WindowPadding                     = ImVec2(8.00f, 8.00f);
+        style.WindowTitleAlign                  = ImVec2(0.5f,0.5f);
         style.FramePadding                      = ImVec2(5.00f, 2.00f);
         style.CellPadding                       = ImVec2(6.00f, 6.00f);
         style.ItemSpacing                       = ImVec2(6.00f, 6.00f);
@@ -266,7 +240,7 @@ namespace GUI
         style.GrabRounding                      = 3;
         style.LogSliderDeadzone                 = 4;
         style.TabRounding                       = 4;
-        style.WindowTitleAlign                  = ImVec2(0.5f,0.5f);
+        
 
         std::cout << "GUI initialized" << std::endl;
     }
@@ -277,14 +251,10 @@ namespace GUI
         if (visible)
         {
             GUI::MainWindow::render();
-            #ifdef QBOT_DEVMODE
-            GUI::DebugWindow::render();
-            #endif
             if (demoWindow)
             {
                 ImGui::ShowDemoWindow();
             }
-            
         }
     }
 } // namespace GUI

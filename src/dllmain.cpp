@@ -29,13 +29,14 @@ DWORD MainThread(LPVOID lpParam)
         GUI::visible = !GUI::visible;
     });
 
-    ImGuiHook::setToggleKey(VK_HOME);
+    ImGuiHook::setToggleKey(VK_RSHIFT);
 
     ImGuiHook::setupHooks([](void* target, void* hook, void** trampoline) {
         MH_CreateHook(target, hook, trampoline);
     });
 
     Hooks::init(); // All GD-related hooks
+    
 
     MH_EnableHook(MH_ALL_HOOKS);
 

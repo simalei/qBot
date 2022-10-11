@@ -1,11 +1,11 @@
 #pragma once
 #include <includes.hpp>
 #include "../Speedhack/Speedhack.hpp"
+#include "../FPSMultiplier/FPSMultiplier.hpp"
 
 namespace FPSBypass
 {
-    extern int target_fps;
+    extern float target_fps;
 
-    void setFPS(float divider);
     void setFPS();
 } // namespace FPSBypass
