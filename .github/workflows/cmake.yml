@@ -41,11 +41,3 @@ jobs:
       with:
         name: Windows Binary
         path: ./build/Release
-        
-    - name: Upload to Discord
-      uses: sinshutu/upload-to-discord@v2.0.0
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      with:
-        args: ./build/Release/qBot.dll
-
