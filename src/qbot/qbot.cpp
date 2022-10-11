@@ -192,7 +192,7 @@ namespace qBot
 
     void Reset(gd::PlayLayer* self)
     {
-        if (!self->m_isPracticeMode)
+        if (!self->m_isPracticeMode && GUI::mode == 1)
         {
             vanilaMacro.clear();
         }

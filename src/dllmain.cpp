@@ -8,18 +8,10 @@
 
 DWORD MainThread(LPVOID lpParam)
 {
-    #ifdef QBOT_DEVMODE
-    AllocConsole();
-    SetConsoleTitle("qBot debug console");
-    freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
-    #endif
-
     _mkdir("qBot");
     _mkdir("qBot\\replays");
-    _mkdir("qBot\\clicks");
 
     MH_Initialize();
-
     NFD_Init();
 
     ImGuiHook::setInitFunction(GUI::initUI);
