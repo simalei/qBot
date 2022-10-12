@@ -4,6 +4,7 @@
 
 #include <includes.hpp>
 #include <fstream>
+#include <7zpp.h>
 #include "../qbot/qbot.hpp"
 #include "../hooks/hooks/Speedhack/Speedhack.hpp"
 #include "../hooks/hooks/FPSBypass/FPSBypass.hpp"

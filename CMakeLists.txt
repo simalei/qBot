@@ -23,6 +23,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 	libraries/gd.h/include
 	libraries/imgui-notify/example/
 	libraries/imgui-notify/example/src
+	libraries/7zip-cpp/Include/7zpp
 	src/
 )
 
@@ -30,6 +31,7 @@ add_subdirectory(libraries/minhook)
 add_subdirectory(libraries/imgui-hook)
 add_subdirectory(libraries/cocos-headers)
 add_subdirectory(libraries/nfd-extended)
+add_subdirectory(libraries/7zip-cpp)
 
 
 target_link_libraries(${PROJECT_NAME}
@@ -39,4 +41,5 @@ target_link_libraries(${PROJECT_NAME}
 	opengl32
 	cocos2d
 	nfd
+	7zpp
 )

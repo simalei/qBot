@@ -5,11 +5,58 @@ namespace GUI
     ImVec2 buttonSize = {282.f, 24.f};
     ImVec2 mainWindowPos;
     bool visible = false;
-
+    bool loadResult;
     bool demoWindow = false;
     bool clickbotWindow = false;
     int mode = 0;
-    nfdfilteritem_t filter[] = {{"qBot replay file", "dat"}};
+    nfdfilteritem_t filter[] = { { "Compressed qBot replay", "qb2" }, { "Uncompressed qBot replay", "dat" } };
+    SevenZip::SevenZipLibrary lib;
+    
+    std::string getFileExt(const std::string& s) {
+        size_t i = s.rfind('.', s.length());
+        if (i != std::string::npos) {
+            return(s.substr(i+1, s.length() - i));
+        }
+
+        return("");
+    }
+
+    void saveMacro(nfdchar_t* outPath)
+    {
+        std::ofstream out(outPath, std::ios::binary);
+        out.write((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*qBot::vanilaMacro.size());
+    }
+
+    void loadMacro(nfdchar_t* outPath)
+    {
+        std::ifstream in(outPath, std::ios::binary);
+        size_t count = in.seekg(0, std::ios::end).tellg()/sizeof(SAMPLE);
+        qBot::vanilaMacro.resize(count);
+        in.seekg(0);
+        in.read((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*count);
+    }
+    
+    void compress(nfdchar_t* outPath)
+    {
+        SevenZip::SevenZipCompressor compressor(lib, outPath);
+        compressor.SetCompressionFormat(SevenZip::CompressionFormat::Zip);
+        compressor.UseAbsolutePaths(false);
+        compressor.AddFile("macro");
+        compressor.DoCompress();
+        remove("macro");
+        std::stringstream ss;
+        ss << outPath << ".zip";
+        auto oldName = ss.str().c_str();
+        rename(oldName, outPath);
+    }
+
+    void decompress(nfdchar_t* outPath)
+    {
+        SevenZip::SevenZipExtractor extractor(lib, outPath);
+        extractor.SetCompressionFormat(SevenZip::CompressionFormat::Zip);
+        std::cout << extractor.ExtractArchive("") << std::endl;
+    }
+
 
     namespace MainWindow
     {
@@ -45,11 +92,16 @@ namespace GUI
                     if (ImGui::Button("Save macro", buttonSize))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 1, "qBot\\replays", qBot::levelName.c_str());
+                        nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 2, "replays", qBot::levelName.c_str());
                         if (result == NFD_OKAY)
                         {
-                            std::ofstream out(outPath, std::ios::binary);
-                            out.write((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*qBot::vanilaMacro.size());
+                            if (getFileExt(std::string(outPath)) == "dat")
+                            {
+                                saveMacro(outPath);
+                            } else {
+                                saveMacro("macro");
+                                compress(outPath);
+                            }
                             ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully saved to %s", outPath});
                         }
                     }
@@ -57,17 +109,20 @@ namespace GUI
                     if (ImGui::Button("Load macro", buttonSize))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_OpenDialogU8(&outPath, filter, 1, "qBot\\replays");
+                        nfdresult_t result = NFD_OpenDialogU8(&outPath, filter, 2, "replays");
                         if (result == NFD_OKAY)
                         {
                             qBot::vanilaMacro.clear();
-                            std::ifstream in(outPath, std::ios::binary);
-                            size_t count = in.seekg(0, std::ios::end).tellg()/sizeof(SAMPLE);
-                            qBot::vanilaMacro.resize(count);
-                            in.seekg(0);
-                            in.read((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*count);
+                            if (getFileExt(std::string(outPath)) == "dat")
+                            {
+                                loadMacro(outPath);
+                            } else {
+                                decompress(outPath);
+                                loadMacro("macro");
+                                remove("macro");
+                            }
                             ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay %s successfully loaded", outPath});
-                        }   
+                        }
                     }
                     
                     if (ImGui::Button("Clear macro", buttonSize))
@@ -137,8 +192,6 @@ namespace GUI
             }
             
             ImGui::End();
-
-        
         }
     } // namespace MainWindow
     
@@ -157,6 +210,10 @@ namespace GUI
 
     void initUI()
     {
+        if(!lib.Load(_T("7z.dll")))
+        {
+            MessageBox(NULL, "7z.dll is not loaded. Compressed macros won't work!", "qBot", MB_ICONERROR);   
+        }
         ImGuiIO* io = &ImGui::GetIO();
         ImFontConfig font_cfg;
         font_cfg.FontDataOwnedByAtlas = false;

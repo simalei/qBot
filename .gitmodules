@@ -16,6 +16,6 @@
 [submodule "libraries/cocos-headers"]
 	path = libraries/cocos-headers
 	url = https://github.com/HJFod/cocos-headers
-[submodule "libraries/gd.h"]
-	path = libraries/gd.h
-	url = https://github.com/HJFod/gd.h
+[submodule "libraries/7zip-cpp"]
+	path = libraries/7zip-cpp
+	url = https://github.com/getnamo/7zip-cpp

@@ -8,9 +8,7 @@
 
 DWORD MainThread(LPVOID lpParam)
 {
-    _mkdir("qBot");
-    _mkdir("qBot\\replays");
-
+    _mkdir("replays");
     MH_Initialize();
     NFD_Init();
 
