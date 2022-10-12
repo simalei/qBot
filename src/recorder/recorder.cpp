@@ -29,5 +29,6 @@ namespace Recorder
         auto gameManager = gd::GameManager::sharedState();
         auto playLayer = gameManager->getPlayLayer();
         auto songFile = playLayer->m_level->getAudioFileName();
+        auto fadeIn = playLayer->m_pLevelSettings->
     }
 }
