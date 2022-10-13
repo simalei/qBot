@@ -2,6 +2,7 @@
 
 #include <includes.hpp>
 #include "../../../qbot/qbot.hpp"
+#include "../../../recorder/recorder.hpp"
 
 namespace Hooks::PlayLayer
 {

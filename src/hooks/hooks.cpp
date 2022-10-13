@@ -1,6 +1,7 @@
 #include "hooks.hpp"
 #include "hooks/PlayLayer/PlayLayer.hpp"
-#include "hooks/FPSMultiplier/FPSMultiplier.hpp"
+#include "hooks/CCScheduler/CCScheduler.hpp"
+#include "hooks/dispatchKeyboardMSG/dispatchKeyboardMSG.hpp"
 
 void Hooks::init()
 {
@@ -65,4 +66,8 @@ void Hooks::init()
 		Hooks::CCScheduler::hkUpdate,
 		(LPVOID*)&Hooks::CCScheduler::update
 	);
+	MH_CreateHook(
+		(PVOID)(GetProcAddress(GetModuleHandleA("libcocos2d.dll"), "?dispatchKeyboardMSG@CCKeyboardDispatcher@cocos2d@@QAE_NW4enumKeyCodes@2@_N@Z")),
+		Hooks::Misc::hkDispatchKeyboardMSG,
+		(LPVOID*)&Hooks::Misc::dispatchKeyboardMSG);
 }

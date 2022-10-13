@@ -18,7 +18,7 @@ namespace qBot
     std::vector<std::tuple<bool, bool, float, float, float, float, float, float, double, double, bool, bool>> vanilaMacro;
     std::vector<int> checkpoints;
     std::string levelName = "";
-    
+
     std::string getStatusText()
     {
         std::stringstream ss;
@@ -68,18 +68,11 @@ namespace qBot
 
         if (GUI::mode == 1)
         {
-            if (showStatusEnabled)
-            {
-                statusText->setString(getStatusText().c_str());
-                statusText->setVisible(true);
-                auto size = statusText->getScaledContentSize();
-                statusText->setPosition({ size.width / 2 + 3, size.height / 2 + 3});
-            } else {
-                statusText->setVisible(false);
-            }
-
             if (frame != 0)
             {
+                std::cout << "pushed back for frame " << frame << std::endl;
+                std::cout << "p1 state: " << p1ButtonPushed << std::endl;
+                std::cout << "p2 state: " << p2ButtonPushed << std::endl;
                 vanilaMacro.push_back({
                 p1ButtonPushed,
                 p2ButtonPushed,
@@ -95,28 +88,40 @@ namespace qBot
                 self->m_pPlayer2->unk5FE,
                 });
             }
+            if (showStatusEnabled)
+            {
+                statusText->setString(getStatusText().c_str());
+                statusText->setVisible(true);
+                auto size = statusText->getScaledContentSize();
+                statusText->setPosition({ size.width / 2 + 3, size.height / 2 + 3});
+            } else {
+                statusText->setVisible(false);
+            }
         }
         
         if (GUI::mode == 2)
         {
+            
             if (frame != 0 && vanilaMacro.size() > (size_t)frame && !self->m_isDead)
             {
-                if (showStatusEnabled)
-                {
-                    statusText->setString(getStatusText().c_str());
-                    statusText->setVisible(true);
-                    auto size = statusText->getScaledContentSize();
-                    statusText->setPosition({ size.width / 2 + 3, size.height / 2 + 3});
-                } else {
-                    statusText->setVisible(false);
-                }
                 if (accuracyFixEnabled)
                 {
+
                     self->m_pPlayer1->setPositionX(std::get<2>(qBot::vanilaMacro[frame - 1]));
                     self->m_pPlayer1->setPositionY(std::get<4>(qBot::vanilaMacro[frame - 1]));
                     self->m_pPlayer1->setRotation(std::get<6>(qBot::vanilaMacro[frame - 1]));
                     self->m_pPlayer1->m_yAccel = std::get<8>(qBot::vanilaMacro[frame - 1]);
                     self->m_pPlayer1->unk5FE = std::get<10>(qBot::vanilaMacro[frame - 1]);
+                    
+                    if (self->m_pLevelSettings->m_twoPlayerMode)
+                    {
+                        self->m_pPlayer2->setPositionX(std::get<3>(qBot::vanilaMacro[frame - 1]));
+                        self->m_pPlayer2->setPositionY(std::get<5>(qBot::vanilaMacro[frame - 1]));
+                        self->m_pPlayer2->setRotation(std::get<7>(qBot::vanilaMacro[frame - 1]));
+                        self->m_pPlayer2->m_yAccel = std::get<9>(qBot::vanilaMacro[frame - 1]);
+                        self->m_pPlayer2->unk5FE = std::get<11>(qBot::vanilaMacro[frame - 1]);
+                    }
+                    
                 }
 
                 
@@ -129,24 +134,28 @@ namespace qBot
                     p1ButtonPushed = false;
                 }
 
-                if (accuracyFixEnabled)
+                if (self->m_pLevelSettings->m_twoPlayerMode)
                 {
-                    self->m_pPlayer2->setPositionX(std::get<3>(qBot::vanilaMacro[frame - 1]));
-                    self->m_pPlayer2->setPositionY(std::get<5>(qBot::vanilaMacro[frame - 1]));
-                    self->m_pPlayer2->setRotation(std::get<7>(qBot::vanilaMacro[frame - 1]));
-                    self->m_pPlayer2->m_yAccel = std::get<9>(qBot::vanilaMacro[frame - 1]);
-                    self->m_pPlayer2->unk5FE = std::get<11>(qBot::vanilaMacro[frame - 1]);
+                    if (std::get<1>(qBot::vanilaMacro[frame]) && !p2ButtonPushed) {
+                        Hooks::PlayLayer::pushButton(self, 0, false);
+                        p2ButtonPushed = true;
+                    }
+                    if (!std::get<1>(qBot::vanilaMacro[frame]) && p2ButtonPushed) {
+                        Hooks::PlayLayer::releaseButton(self, 0, false);
+                        p2ButtonPushed = false;
+                    }
                 }
-                
-                
-                if (std::get<1>(qBot::vanilaMacro[frame]) && !p2ButtonPushed) {
-                    Hooks::PlayLayer::pushButton(self, 0, false);
-                    p2ButtonPushed = true;
+
+                if (showStatusEnabled)
+                {
+                    statusText->setString(getStatusText().c_str());
+                    statusText->setVisible(true);
+                    auto size = statusText->getScaledContentSize();
+                    statusText->setPosition({ size.width / 2 + 3, size.height / 2 + 3});
+                } else {
+                    statusText->setVisible(false);
                 }
-                if (!std::get<1>(qBot::vanilaMacro[frame]) && p2ButtonPushed) {
-                    Hooks::PlayLayer::releaseButton(self, 0, false);
-                    p2ButtonPushed = false;
-                }
+
             }
         }
 

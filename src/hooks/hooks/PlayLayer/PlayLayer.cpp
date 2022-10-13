@@ -6,26 +6,32 @@ namespace Hooks::PlayLayer
     bool ignoreUserInputEnabled = false;
     bool dualClickEnabled = false;
 
+    auto& rec = Recorder::get();
+
     bool __fastcall hkInit(gd::PlayLayer* self, int edx, void* GJGameLevel)
     {
         PlayLayer::init(self, GJGameLevel);
         std::cout << "playlayer initialized" << std::endl;
         qBot::Init(self);
-        
-        
+        rec.updateSongOffset(self);
 
 
         return true;
     }
 
     void __fastcall hkUpdate(gd::PlayLayer* self, void*, float delta)
-    {      
+    {
+        if (rec.recording)
+        {
+            rec.handleRecording(self, delta);
+        }
         if (lockDeltaEnabled && GUI::mode == 2)
         {
             update(self, 1 / FPSMultiplier::target_fps);
         } else {
             update(self, delta);
         }
+
         qBot::Update(self);
     }
 
@@ -45,12 +51,14 @@ namespace Hooks::PlayLayer
     {
         qBot::frame = 0;
         resetLevel(self);
+        rec.updateSongOffset(self);
         qBot::Reset(self);
         return 0;
     }
 
     bool __fastcall hkPushButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
+        std::cout << "push button" << std::endl;
         qBot::PushButton(self, player);
         if (ignoreUserInputEnabled && GUI::mode == 2)
         {
@@ -65,6 +73,7 @@ namespace Hooks::PlayLayer
 
     bool __fastcall hkReleaseButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
+        std::cout << "release button" << std::endl;
         qBot::ReleaseButton(self, player);
         if (ignoreUserInputEnabled && GUI::mode == 2)
         {

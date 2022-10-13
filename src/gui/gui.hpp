@@ -5,10 +5,12 @@
 #include <includes.hpp>
 #include <fstream>
 #include <7zpp.h>
+#include <misc/cpp/imgui_stdlib.h>
 #include "../qbot/qbot.hpp"
 #include "../hooks/hooks/Speedhack/Speedhack.hpp"
 #include "../hooks/hooks/FPSBypass/FPSBypass.hpp"
-#include "../hooks/hooks/FPSMultiplier/FPSMultiplier.hpp"
+#include "../hooks/hooks/CCScheduler/CCScheduler.hpp"
+#include "../recorder/recorder.hpp"
 
 namespace GUI
 {
@@ -17,6 +19,7 @@ namespace GUI
 
     extern bool visible;
     extern int mode;
+    
 
     namespace MainWindow
     {

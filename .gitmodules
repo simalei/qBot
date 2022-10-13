@@ -12,10 +12,16 @@
 	url = https://github.com/ocornut/imgui
 [submodule "libraries/imgui-hook"]
 	path = libraries/imgui-hook
-	url = https://github.com/oneparsec/imgui-hook
+	url = https://github.com/adarift/imgui-hook
 [submodule "libraries/cocos-headers"]
 	path = libraries/cocos-headers
 	url = https://github.com/HJFod/cocos-headers
 [submodule "libraries/7zip-cpp"]
 	path = libraries/7zip-cpp
 	url = https://github.com/getnamo/7zip-cpp
+[submodule "libraries/gd.h"]
+	path = libraries/gd.h
+	url = https://github.com/adarift/gd.h
+[submodule "libraries/curlcpp"]
+	path = libraries/curlcpp
+	url = https://github.com/JosephP91/curlcpp

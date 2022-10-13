@@ -32,14 +32,16 @@ add_subdirectory(libraries/imgui-hook)
 add_subdirectory(libraries/cocos-headers)
 add_subdirectory(libraries/nfd-extended)
 add_subdirectory(libraries/7zip-cpp)
-
+add_subdirectory(libraries/curlcpp)
 
 target_link_libraries(${PROJECT_NAME}
-	${CMAKE_SOURCE_DIR}/libraries/cocos-headers/cocos2dx/libcocos2d.lib
 	imgui-hook
 	minhook
 	opengl32
 	cocos2d
 	nfd
 	7zpp
+	
+	${CMAKE_SOURCE_DIR}/libraries/glew32.lib
+	${CMAKE_SOURCE_DIR}/libraries/cocos-headers/cocos2dx/libcocos2d.lib
 )

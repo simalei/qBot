@@ -2,6 +2,8 @@
 
 namespace GUI
 {
+    
+
     ImVec2 buttonSize = {282.f, 24.f};
     ImVec2 mainWindowPos;
     bool visible = false;
@@ -9,15 +11,23 @@ namespace GUI
     bool demoWindow = false;
     bool clickbotWindow = false;
     int mode = 0;
-    nfdfilteritem_t filter[] = { { "Compressed qBot replay", "qb2" }, { "Uncompressed qBot replay", "dat" } };
-    SevenZip::SevenZipLibrary lib;
+    auto& rec = Recorder::get();
+    bool LICENSED = false;
+    struct {
+        std::string username;
+        std::string password;
+        bool rememberCredentials;
+    } license;
     
+
+    nfdfilteritem_t filter[] = { { "Compressed qBot replay", "qb2" }, { "Uncompressed qBot replay", "qb" } };
+    SevenZip::SevenZipLibrary lib;
+
     std::string getFileExt(const std::string& s) {
         size_t i = s.rfind('.', s.length());
         if (i != std::string::npos) {
             return(s.substr(i+1, s.length() - i));
         }
-
         return("");
     }
 
@@ -25,6 +35,7 @@ namespace GUI
     {
         std::ofstream out(outPath, std::ios::binary);
         out.write((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*qBot::vanilaMacro.size());
+        GUI::mode = 0;
     }
 
     void loadMacro(nfdchar_t* outPath)
@@ -34,6 +45,7 @@ namespace GUI
         qBot::vanilaMacro.resize(count);
         in.seekg(0);
         in.read((char*)qBot::vanilaMacro.data(),sizeof(SAMPLE)*count);
+        GUI::mode = 2;
     }
     
     void compress(nfdchar_t* outPath)
@@ -55,6 +67,24 @@ namespace GUI
         SevenZip::SevenZipExtractor extractor(lib, outPath);
         extractor.SetCompressionFormat(SevenZip::CompressionFormat::Zip);
         std::cout << extractor.ExtractArchive("") << std::endl;
+    }
+
+
+    namespace LoginWindow
+    {
+        void render()
+        {
+            ImGui::Begin("qBot");
+            ImGui::InputText("Username", &license.username);
+            ImGui::InputText("Password", &license.password, ImGuiInputTextFlags_Password);
+            ImGui::Checkbox("Remember credentials", &license.rememberCredentials);
+            if (ImGui::Button("Login"))
+            {
+                // logining
+                LICENSED = true;
+            }
+            
+        }
     }
 
 
@@ -92,10 +122,10 @@ namespace GUI
                     if (ImGui::Button("Save macro", buttonSize))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 2, "replays", qBot::levelName.c_str());
+                        nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 2, ".qbot\\replays", qBot::levelName.c_str());
                         if (result == NFD_OKAY)
                         {
-                            if (getFileExt(std::string(outPath)) == "dat")
+                            if (getFileExt(std::string(outPath)) == "qb")
                             {
                                 saveMacro(outPath);
                             } else {
@@ -109,11 +139,11 @@ namespace GUI
                     if (ImGui::Button("Load macro", buttonSize))
                     {
                         nfdchar_t *outPath;
-                        nfdresult_t result = NFD_OpenDialogU8(&outPath, filter, 2, "replays");
+                        nfdresult_t result = NFD_OpenDialogU8(&outPath, filter, 2, ".qbot\\replays");
                         if (result == NFD_OKAY)
                         {
                             qBot::vanilaMacro.clear();
-                            if (getFileExt(std::string(outPath)) == "dat")
+                            if (getFileExt(std::string(outPath)) == "qb")
                             {
                                 loadMacro(outPath);
                             } else {
@@ -150,6 +180,96 @@ namespace GUI
                         FPSBypass::setFPS();
                     }
 
+                    ImGui::Separator();
+                    ImGui::Checkbox("Frame advance", &FrameAdvance::frameAdvanceEnabled);
+
+                    ImGui::EndTabItem();
+                }
+                if (ImGui::BeginTabItem("Video"))
+                {
+                    ImGui::InputInt("Width", &rec.width);
+                    ImGui::InputInt("Height", &rec.height);
+                    ImGui::InputInt("FPS", &rec.fps);
+                    ImGui::InputText("Codec", &rec.codec);
+                    ImGui::InputText("Bitrate", &rec.bitrate);
+                    ImGui::InputText("Extra args", &rec.extraArgs);
+                    ImGui::Checkbox("Include audio", &rec.includeAudio);
+                    ImGui::SameLine();
+                    if (ImGui::Button("Presets"))
+                    {
+                        ImGui::OpenPopup("PresetsPopup");                    
+                    }
+                    if (ImGui::BeginPopup("PresetsPopup"))
+                    {
+                        if (ImGui::Button("HD (720p)"))
+                        {
+                            rec.width = 1280;
+                            rec.height = 720;
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if (ImGui::Button("Full HD (1080p)"))
+                        {
+                            rec.width = 1920;
+                            rec.height = 1080;
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if (ImGui::Button("Quad HD (1440p)"))
+                        {
+                            rec.width = 2560;
+                            rec.height = 1440;
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if (ImGui::Button("4K (2160p)"))
+                        {
+                            rec.width = 3840;
+                            rec.height = 2160;
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if (ImGui::Button("NVIDIA GPU codec"))
+                        {
+                            rec.codec = "h264_nvenc";
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if (ImGui::Button("AMD GPU codec"))
+                        {
+                            rec.codec = "h264_amf";
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if (ImGui::Button("Intel CPU codec"))
+                        {
+                            rec.codec = "h264_qsv";
+                            ImGui::CloseCurrentPopup();
+                        }
+                        
+                        
+                        ImGui::EndPopup();
+                    }
+                    
+                    
+                    if (!rec.recording)
+                    {
+                        if (ImGui::Button("Start recording", buttonSize))
+                        {
+                            if (qBot::inLevel)
+                            {
+                                nfdchar_t* path = nullptr;
+                                nfdfilteritem_t recorderFilter[] = { {"Video file", "mp4"} };
+                                if (NFD_SaveDialogU8(&path, recorderFilter, 1, ".qbot\\videos", qBot::levelName.c_str()) == NFD_OKAY)
+                                {
+                                    rec.lastFrameTime = 0;
+                                    rec.start(path);
+                                }   
+                            } else {
+                                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Recording can be started only if you're in level"});
+                            }
+                        }
+                    } else {
+                        if (ImGui::Button("Stop recording", buttonSize))
+                        {
+                            rec.stop();
+                        }
+                    }
+
                     ImGui::EndTabItem();
                 }
                 if (ImGui::BeginTabItem("Settings"))
@@ -158,7 +278,6 @@ namespace GUI
 
                     ImGui::Checkbox("Accuracy fix", &qBot::accuracyFixEnabled);
                     ImGui::Checkbox("FPS multiplier", &FPSMultiplier::enabled);
-                    ImGui::Checkbox("Lock delta while replaying", &Hooks::PlayLayer::lockDeltaEnabled);
                     ImGui::Checkbox("Ignore user input", &Hooks::PlayLayer::ignoreUserInputEnabled);
                     ImGui::Checkbox("Dual click", &Hooks::PlayLayer::dualClickEnabled);
                     ImGui::Checkbox("Show status", &qBot::showStatusEnabled);
@@ -185,12 +304,18 @@ namespace GUI
 
                     ImGui::Separator();
 
+                    if (ImGui::Button("Log out", buttonSize))
+                    {
+                        LICENSED = false;
+                    }
+                    
+
                     ImGui::EndTabItem();
                 }
                 
                 ImGui::EndTabBar();
             }
-            
+
             ImGui::End();
         }
     } // namespace MainWindow
@@ -298,7 +423,6 @@ namespace GUI
         style.LogSliderDeadzone                 = 4;
         style.TabRounding                       = 4;
         
-
         std::cout << "GUI initialized" << std::endl;
     }
 
@@ -307,7 +431,12 @@ namespace GUI
         GUI::Notifications::render();
         if (visible)
         {
-            GUI::MainWindow::render();
+            if (LICENSED)
+            {
+                GUI::MainWindow::render();
+            } else {
+                GUI::LoginWindow::render();
+            }
             if (demoWindow)
             {
                 ImGui::ShowDemoWindow();

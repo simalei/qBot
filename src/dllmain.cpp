@@ -8,10 +8,19 @@
 
 DWORD MainThread(LPVOID lpParam)
 {
-    _mkdir("replays");
+    _mkdir(".qbot");
+    _mkdir(".qbot\\videos");
+    _mkdir(".qbot\\replays");
     MH_Initialize();
     NFD_Init();
 
+    
+    AllocConsole();
+    SetConsoleTitle("das debugger");
+    static std::ofstream conout("CONOUT$", std::ios::out);
+    std::cout.rdbuf(conout.rdbuf());
+    
+    
     ImGuiHook::setInitFunction(GUI::initUI);
     ImGuiHook::setRenderFunction(GUI::renderUI);
 
@@ -19,7 +28,7 @@ DWORD MainThread(LPVOID lpParam)
         GUI::visible = !GUI::visible;
     });
 
-    ImGuiHook::setToggleKey(VK_RSHIFT);
+    ImGuiHook::setToggleKey(VK_RCONTROL);
 
     ImGuiHook::setupHooks([](void* target, void* hook, void** trampoline) {
         MH_CreateHook(target, hook, trampoline);

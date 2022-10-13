@@ -1,7 +1,7 @@
 #pragma once
 #include <includes.hpp>
 #include "../Speedhack/Speedhack.hpp"
-#include "../FPSMultiplier/FPSMultiplier.hpp"
+#include "../CCScheduler/CCScheduler.hpp"
 
 namespace FPSBypass
 {

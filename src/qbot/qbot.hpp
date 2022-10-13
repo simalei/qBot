@@ -3,6 +3,7 @@
 #include <vector>
 #include "../gui/gui.hpp"
 #include "../hooks/hooks/PlayLayer/PlayLayer.hpp"
+#include "../recorder/recorder.hpp"
 #include <variant>
 
 template <typename R, typename T>
