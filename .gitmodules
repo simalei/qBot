@@ -22,6 +22,12 @@
 [submodule "libraries/gd.h"]
 	path = libraries/gd.h
 	url = https://github.com/adarift/gd.h
-[submodule "libraries/curlcpp"]
-	path = libraries/curlcpp
-	url = https://github.com/JosephP91/curlcpp
+[submodule "libraries/curl"]
+	path = libraries/curl
+	url = https://github.com/curl/curl
+[submodule "libraries/rapidjson"]
+	path = libraries/rapidjson
+	url = https://github.com/Tencent/rapidjson
+[submodule "libraries/ClipboardXX"]
+	path = libraries/ClipboardXX
+	url = https://github.com/Arian8j2/ClipboardXX

@@ -4,10 +4,10 @@
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4251) // shut up cocos
+#pragma warning( push )
 #endif
-
+#include <algorithm>
 // Windows
-#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 // Cocos2d-x
@@ -31,7 +31,14 @@
 #include <imgui_notify.h>
 #include <tahoma.h>
 
-using namespace cocos2d;
-using namespace cocos2d::extension;
+// Rapidjson
+#include <rapidjson/document.h>
+#include <rapidjson/rapidjson.h>
+#include <rapidjson/istreamwrapper.h>
 
+// ClipboardXX
+#include <clipboardxx.hpp>
+
+using namespace cocos2d;
+#pragma warning( pop )
 #endif

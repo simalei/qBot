@@ -12,8 +12,9 @@ if(${CMAKE_SYSTEM} MATCHES "Darwin" OR ${CMAKE_SYSTEM} MATCHES "Linux")
 	message(FATAL_ERROR "Unsupported operating system. Only Windows is supported right now.")
 endif()
 
-
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
+
+add_definitions(-DCURL_STATICLIB)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
 	libraries/imgui-hook
@@ -24,6 +25,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 	libraries/imgui-notify/example/
 	libraries/imgui-notify/example/src
 	libraries/7zip-cpp/Include/7zpp
+	libraries/rapidjson/include
 	src/
 )
 
@@ -32,7 +34,9 @@ add_subdirectory(libraries/imgui-hook)
 add_subdirectory(libraries/cocos-headers)
 add_subdirectory(libraries/nfd-extended)
 add_subdirectory(libraries/7zip-cpp)
-add_subdirectory(libraries/curlcpp)
+add_subdirectory(libraries/curl)
+add_subdirectory(libraries/rapidjson)
+add_subdirectory(libraries/ClipboardXX)
 
 target_link_libraries(${PROJECT_NAME}
 	imgui-hook
@@ -41,7 +45,8 @@ target_link_libraries(${PROJECT_NAME}
 	cocos2d
 	nfd
 	7zpp
-	
+	libcurl
+	ClipboardXX
 	${CMAKE_SOURCE_DIR}/libraries/glew32.lib
 	${CMAKE_SOURCE_DIR}/libraries/cocos-headers/cocos2dx/libcocos2d.lib
 )

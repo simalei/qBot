@@ -1,8 +1,6 @@
 #include "gui.hpp"
 
-namespace GUI
-{
-    
+namespace GUI {
 
     ImVec2 buttonSize = {282.f, 24.f};
     ImVec2 mainWindowPos;
@@ -12,16 +10,30 @@ namespace GUI
     bool clickbotWindow = false;
     int mode = 0;
     auto& rec = Recorder::get();
-    bool LICENSED = false;
-    struct {
-        std::string username;
-        std::string password;
-        bool rememberCredentials;
-    } license;
-    
 
+    std::string getID()
+    {
+        SYSTEM_INFO siSysInfo;
+        GetSystemInfo(&siSysInfo); 
+        std::string id = std::string(
+        std::to_string(siSysInfo.dwNumberOfProcessors) + 
+        std::to_string(siSysInfo.dwPageSize) + 
+        std::to_string(siSysInfo.dwProcessorType) + 
+        std::to_string(siSysInfo.dwActiveProcessorMask));
+
+        return id;
+    }
+
+    std::string id = getID();
     nfdfilteritem_t filter[] = { { "Compressed qBot replay", "qb2" }, { "Uncompressed qBot replay", "qb" } };
     SevenZip::SevenZipLibrary lib;
+
+    bool tobyadd = false;
+
+    size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
+        data->append((char*) ptr, size * nmemb);
+        return size * nmemb;
+    }
 
     std::string getFileExt(const std::string& s) {
         size_t i = s.rfind('.', s.length());
@@ -69,21 +81,148 @@ namespace GUI
         std::cout << extractor.ExtractArchive("") << std::endl;
     }
 
-
     namespace LoginWindow
     {
-        void render()
+        struct {
+            std::string username;
+            std::string password;
+            bool rememberCredentials;
+        } loginStruct;
+
+        struct {
+            std::string username;
+            std::string password;
+            std::string password2;
+            std::string licenseKey;
+        } registerStruct;
+
+        bool _login = false;
+        bool _register = false;
+
+        void loginFunc()
         {
-            ImGui::Begin("qBot");
-            ImGui::InputText("Username", &license.username);
-            ImGui::InputText("Password", &license.password, ImGuiInputTextFlags_Password);
-            ImGui::Checkbox("Remember credentials", &license.rememberCredentials);
-            if (ImGui::Button("Login"))
+            /* 
+            one means everything is fine
+            zero means hwids don't match
+            negative one means login data is wrong
+            */
+            std::string loginLink = "http://adarift.atwebpages.com/qbot/api/api.php?a=auth&n=" + loginStruct.username + "&p=" + loginStruct.password;
+            CURL *curl;
+            CURLcode res;
+            std::string response;
+            curl = curl_easy_init();
+            if (curl)
             {
-                // logining
-                LICENSED = true;
+                curl_easy_setopt(curl, CURLOPT_URL, loginLink.c_str());
+                curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunction);
+                curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+                res = curl_easy_perform(curl);
+                curl_easy_cleanup(curl);
+            }
+            if (response == "-1")
+            {
+                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Logging in failed. Check your username, password and internet connection."});
+                return;
             }
             
+            if (response == id)
+            {
+                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Logged in succesfully."});
+                if (loginStruct.rememberCredentials)
+                {
+                    auto file = fopen(".qbot\\qBot.dat", "wb");
+                    if (file) {
+                        fwrite(&loginStruct, sizeof(loginStruct), 1, file);
+                        fclose(file);
+                    }
+                }
+                
+                tobyadd = true;
+                return;
+            } else {
+                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "HWID do not match"});
+                return;
+            }
+        }
+
+        void registerFunc()
+        {
+            std::string registerLink = "http://adarift.atwebpages.com/qbot/api/api.php?a=reg&n=" + registerStruct.username + "&p=" + registerStruct.password + "&ui=" + id + "&k=" + registerStruct.licenseKey;
+            CURL *curl;
+            CURLcode res;
+            std::string response;
+            curl = curl_easy_init();
+            if (curl)
+            {
+                curl_easy_setopt(curl, CURLOPT_URL, registerLink.c_str());
+                curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFunction);
+                curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+                res = curl_easy_perform(curl);
+                curl_easy_cleanup(curl);
+            }
+            if (response == "1")
+            {
+                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Registred succesfully. Thanks for purchasing qBot!"});
+            } else {
+                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Registration failed. Check your license key and internet connection."});
+            }
+            return;
+        }
+
+        void render()
+        {
+            ImGui::Begin("qBot login", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+
+            auto windowSize = ImGui::GetWindowSize();
+            ImVec2 btnSize = {windowSize.x - 18, 24.f};
+
+            if (_login)
+            {
+                ImGui::InputText("Username", &loginStruct.username);
+                ImGui::InputText("Password", &loginStruct.password, ImGuiInputTextFlags_Password);
+                ImGui::Checkbox("Remember credentials", &loginStruct.rememberCredentials);
+                if (ImGui::Button("Login", btnSize))
+                {
+                    loginFunc();
+                }
+                if (ImGui::Button("Go back", btnSize))
+                {
+                    _login = false;
+                }
+            } else if (_register)
+            {
+                ImGui::InputText("Username", &registerStruct.username);
+                ImGui::InputText("Password", &registerStruct.password, ImGuiInputTextFlags_Password);
+                ImGui::InputText("Confirm password", &registerStruct.password2, ImGuiInputTextFlags_Password);
+                ImGui::InputText("License key", &registerStruct.licenseKey);
+                if (ImGui::Button("Register", btnSize))
+                {
+                    if (registerStruct.password == registerStruct.password2)
+                    {
+                        registerFunc();
+                    } else {
+                        ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Passwords do not match"});
+                    }
+                    
+                }
+                if (ImGui::Button("Go back", btnSize))
+                {
+                    _register = false;
+                }
+                
+            } else {
+                if (ImGui::Button("Login", buttonSize))
+                {
+                    _login = true;
+                    _register = false;
+                }
+                if (ImGui::Button("Register", buttonSize))
+                {
+                    _register = true;
+                    _login = false;
+                }
+            }
+            ImGui::End();
         }
     }
 
@@ -303,11 +442,13 @@ namespace GUI
                     ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", ImGui::GetVersion());
 
                     ImGui::Separator();
-
                     if (ImGui::Button("Log out", buttonSize))
                     {
-                        LICENSED = false;
+                        tobyadd = false;
+                        remove("qBot\\qBot.dat");
                     }
+                    
+                    
                     
 
                     ImGui::EndTabItem();
@@ -335,6 +476,18 @@ namespace GUI
 
     void initUI()
     {
+        auto file = fopen(".qbot\\qBot.dat", "rb");
+        if (file) {
+            fseek(file, 0, SEEK_END);
+            auto size = ftell(file);
+
+            if (size == sizeof(LoginWindow::loginStruct)) {
+                fseek(file, 0, SEEK_SET);
+                fread(&LoginWindow::loginStruct, sizeof(LoginWindow::loginStruct), 1, file);
+                fclose(file);
+            }
+        }
+        LoginWindow::loginFunc();
         if(!lib.Load(_T("7z.dll")))
         {
             MessageBox(NULL, "7z.dll is not loaded. Compressed macros won't work!", "qBot", MB_ICONERROR);   
@@ -429,9 +582,14 @@ namespace GUI
     void renderUI()
     {
         GUI::Notifications::render();
+        if (IsDebuggerPresent())
+        {
+            exit(-1);
+        }
+        
         if (visible)
         {
-            if (LICENSED)
+            if (tobyadd)
             {
                 GUI::MainWindow::render();
             } else {

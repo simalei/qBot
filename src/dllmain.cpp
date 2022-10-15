@@ -1,5 +1,5 @@
 // #define QBOT_DEVMODE
-
+#pragma warning( disable : 4100 )
 #include <includes.hpp>
 
 #include "hooks/hooks.hpp"
@@ -14,13 +14,13 @@ DWORD MainThread(LPVOID lpParam)
     MH_Initialize();
     NFD_Init();
 
-    
+    /*
     AllocConsole();
     SetConsoleTitle("das debugger");
     static std::ofstream conout("CONOUT$", std::ios::out);
     std::cout.rdbuf(conout.rdbuf());
-    
-    
+    */
+
     ImGuiHook::setInitFunction(GUI::initUI);
     ImGuiHook::setRenderFunction(GUI::renderUI);
 
