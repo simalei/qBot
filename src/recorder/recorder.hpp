@@ -56,25 +56,3 @@ public:
     void handleRecording(gd::PlayLayer*, float dt);
     void updateSongOffset(gd::PlayLayer*);
 };
-
-/*
-    extern bool isRecording;
-    extern RenderTexture renderer;
-    extern int width;
-    extern int height;
-    extern int fps;
-    extern std::string codec, bitrate, extraArgs, extraAudioArgs;
-    extern float afterEndDuration;
-    extern float afterEndExtraTime;
-    extern float songStartOffset;
-    extern bool finishedLevel;
-    extern bool includeAudio;
-    extern std::string ffmpegPath;
-
-    void start(const std::string& path);
-    void stop();
-    void captureFrame();
-    void handleRecording(gd::PlayLayer*, float dt);
-    void updateSongOffset(gd::PlayLayer*);
-
-*/

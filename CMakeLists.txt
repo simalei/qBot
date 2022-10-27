@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0.0)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 
 project(qBot VERSION 0.1.0)
 
@@ -17,16 +20,16 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES})
 add_definitions(-DCURL_STATICLIB)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-	libraries/imgui-hook
-	libraries/imgui
-  	libraries/minhook/include
-	libraries/gd.h
-	libraries/gd.h/include
-	libraries/imgui-notify/example/
-	libraries/imgui-notify/example/src
-	libraries/7zip-cpp/Include/7zpp
-	libraries/rapidjson/include
-	src/
+		libraries/imgui-hook
+		libraries/imgui
+		libraries/minhook/include
+		libraries/gd.h
+		libraries/gd.h/include
+		libraries/imgui-notify/example/
+		libraries/imgui-notify/example/src
+		libraries/7zip-cpp/Include/7zpp
+		libraries/rapidjson/include
+		src/
 )
 
 add_subdirectory(libraries/minhook)

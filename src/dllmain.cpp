@@ -1,4 +1,3 @@
-// #define QBOT_DEVMODE
 #pragma warning( disable : 4100 )
 #include <includes.hpp>
 

@@ -29,7 +29,7 @@ namespace qBot
             break;
         
         case 2:
-            ss << "Playing: " << frame + 1 << "/" << vanilaMacro.size(); 
+            ss << "Playing: " << frame + 1 << "/" << vanilaMacro.size();
             break;
 
         default:
@@ -101,9 +101,6 @@ namespace qBot
             
             if (frame != 0 && vanilaMacro.size() > (size_t)frame && !self->m_isDead)
             {
-
-
-                
                 if (std::get<0>(qBot::vanilaMacro[frame]) && !p1ButtonPushed) {
                     Hooks::PlayLayer::pushButton(self, 0, true);
                     p1ButtonPushed = true;

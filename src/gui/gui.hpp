@@ -1,5 +1,4 @@
 #pragma once
-#define QBOT_DEVMODE
 #define SAMPLE std::tuple<bool, bool, float, float, float, float, float, float, double, double, bool, bool>
 #include <curl/curl.h>
 #include <includes.hpp>
@@ -12,6 +11,7 @@
 #include "../hooks/hooks/CCScheduler/CCScheduler.hpp"
 #include "../recorder/recorder.hpp"
 #include <thread>
+#include <string>
 
 namespace GUI
 {
@@ -20,8 +20,6 @@ namespace GUI
 
     extern bool visible;
     extern int mode;
-    
-    
 
     namespace MainWindow
     {

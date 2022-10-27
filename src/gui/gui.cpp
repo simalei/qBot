@@ -1,13 +1,16 @@
 #include "gui.hpp"
 
+
+
 namespace GUI {
 
     ImVec2 buttonSize = {282.f, 24.f};
     ImVec2 mainWindowPos;
     bool visible = false;
-    bool loadResult;
+    bool macroEditor = false;
+    ImGuiWindowFlags macroEditorFlags = 0;
+    bool sequenceReplaying = false;
     bool demoWindow = false;
-    bool clickbotWindow = false;
     int mode = 0;
     auto& rec = Recorder::get();
 
@@ -25,10 +28,15 @@ namespace GUI {
     }
 
     std::string id = getID();
-    nfdfilteritem_t filter[] = { { "Compressed qBot replay", "qb2" }, { "Uncompressed qBot replay", "qb" } };
+    nfdfilteritem_t filter[] = { { "Compressed qBot replay", "qb2" }, { "Uncompressed qBot replay", "qb;dat" } };
     SevenZip::SevenZipLibrary lib;
 
     bool tobyadd = false;
+
+    std::string convertToPlainText()
+    {
+        return ("");
+    }
 
     size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
         data->append((char*) ptr, size * nmemb);
@@ -127,7 +135,7 @@ namespace GUI {
             
             if (response == id)
             {
-                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Logged in succesfully."});
+                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Logged in successfully."});
                 if (loginStruct.rememberCredentials)
                 {
                     auto file = fopen(".qbot\\qBot.dat", "wb");
@@ -232,7 +240,7 @@ namespace GUI {
         void render()
         {
             ImGui::Begin("qBot", nullptr, ImGuiWindowFlags_NoResize);
-            ImGui::SetWindowSize({300,280});
+            ImGui::SetWindowSize({300,300});
             mainWindowPos = ImGui::GetWindowPos();
 
             if (ImGui::BeginTabBar("MainTabBar"))
@@ -264,7 +272,7 @@ namespace GUI {
                         nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 2, ".qbot\\replays", qBot::levelName.c_str());
                         if (result == NFD_OKAY)
                         {
-                            if (getFileExt(std::string(outPath)) == "qb")
+                            if (getFileExt(std::string(outPath)) == "qb" || getFileExt(std::string(outPath)) == "dat")
                             {
                                 saveMacro(outPath);
                             } else {
@@ -282,7 +290,7 @@ namespace GUI {
                         if (result == NFD_OKAY)
                         {
                             qBot::vanilaMacro.clear();
-                            if (getFileExt(std::string(outPath)) == "qb")
+                            if (getFileExt(std::string(outPath)) == "qb" || getFileExt(std::string(outPath)) == "dat")
                             {
                                 loadMacro(outPath);
                             } else {
@@ -298,6 +306,7 @@ namespace GUI {
                     {
                         qBot::vanilaMacro.clear();
                     }
+                    
 
                     ImGui::EndTabItem();
                 }
@@ -322,6 +331,15 @@ namespace GUI {
                     ImGui::Separator();
                     ImGui::Checkbox("Frame advance", &FrameAdvance::frameAdvanceEnabled);
 
+                    ImGui::Separator();
+                    if (ImGui::Button("Macro editor", buttonSize))
+                    {
+                        macroEditor = true;
+                    }
+                    if (ImGui::Button("Sequence replaying", buttonSize))
+                    {
+                        sequenceReplaying = true;
+                    }
                     ImGui::EndTabItem();
                 }
                 if (ImGui::BeginTabItem("Video"))
@@ -435,17 +453,21 @@ namespace GUI {
 
                     ImGui::Text("qBot version:");
                     ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "dev-release");
+                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "v0.3");
 
                     ImGui::Text("ImGui version:");
                     ImGui::SameLine();
                     ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", ImGui::GetVersion());
 
                     ImGui::Separator();
+                    ImGui::Text("Username:");
+                    ImGui::SameLine();
+                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), LoginWindow::loginStruct.username.c_str());
+
                     if (ImGui::Button("Log out", buttonSize))
                     {
                         tobyadd = false;
-                        remove("qBot\\qBot.dat");
+                        remove(".qbot\\qBot.dat");
                     }
                     
                     
@@ -456,7 +478,40 @@ namespace GUI {
                 
                 ImGui::EndTabBar();
             }
+            if (macroEditor)
+            {
+                ImGui::Begin("Macro editor", nullptr,  macroEditorFlags);
 
+                ImGui::SetWindowSize(ImVec2(300, 300));
+                ImGui::SetWindowPos(ImVec2(mainWindowPos.x + 305, mainWindowPos.y));
+
+                if (ImGui::BeginTable("split1", 4, ImGuiTableFlags_Resizable | ImGuiTableFlags_NoSavedSettings | ImGuiTableFlags_Borders))
+                {
+                    ImGui::TableNextColumn();
+                    ImGui::Text("Frame");
+                    ImGui::TableNextColumn();
+                    ImGui::Text("XPos");
+                    ImGui::TableNextColumn();
+                    ImGui::Text("P1 action");
+                    ImGui::TableNextColumn();
+                    ImGui::Text("P2 action");
+
+                    for (int i = 0; i < (int)qBot::vanilaMacro.size(); i++)
+                    {
+                        ImGui::TableNextColumn();
+                        ImGui::Text(std::to_string(i).c_str());
+                        ImGui::TableNextColumn();
+                        ImGui::Text(std::to_string(std::get<2>(qBot::vanilaMacro[i])).c_str());
+                        ImGui::TableNextColumn();
+                        ImGui::Button("Hi");
+                        ImGui::TableNextColumn();
+                        ImGui::Button("Hi 2");
+                    }
+                    ImGui::EndTable();
+                }
+
+                ImGui::End();
+            }
             ImGui::End();
         }
     } // namespace MainWindow
@@ -575,6 +630,8 @@ namespace GUI {
         style.GrabRounding                      = 3;
         style.LogSliderDeadzone                 = 4;
         style.TabRounding                       = 4;
+        macroEditorFlags |= ImGuiWindowFlags_NoMove;
+        macroEditorFlags |= ImGuiWindowFlags_NoResize;
         
         std::cout << "GUI initialized" << std::endl;
     }
@@ -602,6 +659,3 @@ namespace GUI {
         }
     }
 } // namespace GUI
-
-
-
