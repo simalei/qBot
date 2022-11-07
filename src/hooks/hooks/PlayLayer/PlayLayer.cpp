@@ -21,14 +21,19 @@ namespace Hooks::PlayLayer
 
     void __fastcall hkUpdate(gd::PlayLayer* self, void*, float delta)
     {
-        if (rec.recording)
-        {
-            rec.handleRecording(self, delta);
-        }
+
         if (lockDeltaEnabled && GUI::mode == 2)
         {
+            if (rec.recording)
+            {
+                rec.handleRecording(self, FPSMultiplier::target_fps);
+            }
             update(self, 1 / FPSMultiplier::target_fps);
         } else {
+            if (rec.recording)
+            {
+                rec.handleRecording(self, delta);
+            }
             update(self, delta);
         }
 
@@ -92,15 +97,15 @@ namespace Hooks::PlayLayer
         togglePractice(self, practice);
     }
 
-    int __fastcall hkCreateCheckpoint(void* self)
+    int __fastcall hkCreateCheckpoint(gd::PlayLayer* self)
     {
-        qBot::PlaceCheckpoint();
+        qBot::PlaceCheckpoint(self);
         return createCheckpoint(self);
     }
 
-    int __fastcall hkRemoveCheckpoint(void* self)
+    int __fastcall hkRemoveCheckpoint(gd::PlayLayer* self)
     {
-        qBot::RemoveCheckpoint();
+        qBot::RemoveCheckpoint(self);
         return removeCheckpoint(self);
     }
 } // namespace Hooks::PlayLayer

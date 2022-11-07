@@ -4,6 +4,10 @@
 #include "hooks/hooks.hpp"
 #include "gui/gui.hpp"
 #include "direct.h"
+#include "recorder/recorder.hpp"
+
+auto& rec = Recorder::get();
+
 
 DWORD MainThread(LPVOID lpParam)
 {
@@ -13,12 +17,6 @@ DWORD MainThread(LPVOID lpParam)
     MH_Initialize();
     NFD_Init();
 
-    /*
-    AllocConsole();
-    SetConsoleTitle("das debugger");
-    static std::ofstream conout("CONOUT$", std::ios::out);
-    std::cout.rdbuf(conout.rdbuf());
-    */
 
     ImGuiHook::setInitFunction(GUI::initUI);
     ImGuiHook::setRenderFunction(GUI::renderUI);
@@ -41,16 +39,23 @@ DWORD MainThread(LPVOID lpParam)
 	return S_OK;
 }
 
+
+
+
 DWORD WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 {
 	switch (dwReason)
 	{
-	case DLL_PROCESS_ATTACH:
-		CreateThread(NULL, 0x1000, reinterpret_cast<LPTHREAD_START_ROUTINE>(&MainThread), NULL, 0, NULL);
-		break;
+        case DLL_PROCESS_ATTACH:
+            rec.loadRecorderSettings();
+            CreateThread(NULL, 0x1000, reinterpret_cast<LPTHREAD_START_ROUTINE>(&MainThread), NULL, 0, NULL);
+            break;
 
-	default:
-		break;
+        case DLL_PROCESS_DETACH:
+            rec.saveRecorderSettings();
+
+        default:
+            break;
 	}
 
 	return TRUE;

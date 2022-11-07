@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/7zip-cpp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/7zip-cpp/7z" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/7zip-cpp/googletest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/ClipboardXX" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/ClipboardXX/lib/googletest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/cocos-headers" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/cocos-headers/document/doxygen-awesome-css" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/curl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/gd.h" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/imgui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/imgui-hook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/imgui-notify" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/minhook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/nfd-extended" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/rapidjson" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/rapidjson/thirdparty/gtest" vcs="Git" />
+  </component>
+</project>

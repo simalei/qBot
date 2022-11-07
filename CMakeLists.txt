@@ -38,7 +38,7 @@ add_subdirectory(libraries/cocos-headers)
 add_subdirectory(libraries/nfd-extended)
 add_subdirectory(libraries/7zip-cpp)
 add_subdirectory(libraries/curl)
-add_subdirectory(libraries/rapidjson)
+#add_subdirectory(libraries/rapidjson)
 add_subdirectory(libraries/ClipboardXX)
 
 target_link_libraries(${PROJECT_NAME}

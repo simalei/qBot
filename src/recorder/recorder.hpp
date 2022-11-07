@@ -14,6 +14,19 @@ inline auto narrow(const std::wstring& str) { return narrow(str.c_str()); }
 std::wstring widen(const char* str);
 inline auto widen(const std::string& str) { return widen(str.c_str()); }
 
+struct recSettings {
+    int width, height, fps;
+    std::string codec, bitrate, extraArgs, extraAudioArgs;
+};
+
+extern recSettings settings;
+
+/*
+ * struct recSettings {
+    int width = 1280, height = 720, fps = 60;
+    std::string codec = "", bitrate = "30M", extraArgs = "-crf 0", extraAudioArgs = "";
+};
+ */
 
 class RenderTexture {
 public:
@@ -38,12 +51,13 @@ public:
     volatile bool frameHasData;
     std::mutex lock;
     RenderTexture renderer;
-    int width, height;
-    int fps;
+
+
+
     bool recording = false;
     double lastFrameTime, extraTime;
     bool untilEnd = true;
-    std::string codec = "", bitrate = "30M", extraArgs = "", extraAudioArgs = "";
+
     float afterEndDuration = 3.f;
     float afterEndExtraTime;
     float songStartOffset;
@@ -55,4 +69,6 @@ public:
     void captureFrame();
     void handleRecording(gd::PlayLayer*, float dt);
     void updateSongOffset(gd::PlayLayer*);
+    void saveRecorderSettings();
+    void loadRecorderSettings();
 };
