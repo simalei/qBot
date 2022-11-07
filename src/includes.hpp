@@ -32,9 +32,11 @@
 #include <tahoma.h>
 
 // Rapidjson
+/*
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/istreamwrapper.h>
+*/
 
 // ClipboardXX
 #include <clipboardxx.hpp>

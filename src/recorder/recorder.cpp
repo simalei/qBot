@@ -4,6 +4,10 @@
 #include <filesystem>
 #include <fstream>
 
+recSettings settings = {
+    1280, 720, 60,
+    "", "30M", "-crf 0", ""
+};
 
 std::string narrow(const wchar_t* str) {
     int size = WideCharToMultiByte(CP_UTF8, 0, str, -1, nullptr, 0, nullptr, nullptr);
@@ -25,16 +29,16 @@ std::wstring widen(const char* str) {
     return result;
 }
 
-Recorder::Recorder() : width(1280), height(720), fps(60) {}
+Recorder::Recorder() {}
 
 void Recorder::start(const std::string& path)
 {
     recording = true;
     frameHasData = false;
-    currentFrame.resize(width * height * 3, 0);
+    currentFrame.resize(settings.width * settings.height * 3, 0);
     finishedLevel = false;
-    renderer.width = width;
-    renderer.height = height;
+    renderer.width = settings.width;
+    renderer.height = settings.height;
     renderer.begin();
     auto gameManager = gd::GameManager::sharedState();
     auto playLayer = gameManager->getPlayLayer();
@@ -49,13 +53,13 @@ void Recorder::start(const std::string& path)
     auto songOffset = songStartOffset;
     std::thread([&, path, songFile, fadeIn, fadeOut, bgVolume, sfxVolume, isTestmode, songOffset]() {
         std::stringstream ss;
-        ss << '"' << ffmpegPath << '"' << " -y -f rawvideo -pix_fmt rgb24 -s " << width << "x" << height << " -r " << fps << " -i - ";
-        if (!codec.empty())
-            ss << "-c:v " << codec << " ";
-        if (!bitrate.empty())
-            ss << "-b:v " << bitrate << " ";
-        if (!extraArgs.empty())
-            ss << extraArgs << " ";
+        ss << '"' << ffmpegPath << '"' << " -y -f rawvideo -pix_fmt rgb24 -s " << settings.width << "x" << settings.height << " -r " << settings.fps << " -i - ";
+        if (!settings.codec.empty())
+            ss << "-c:v " << settings.codec << " ";
+        if (!settings.bitrate.empty())
+            ss << "-b:v " << settings.bitrate << " ";
+        if (!settings.extraArgs.empty())
+            ss << settings.extraArgs << " ";
         else
             ss << "-pix_fmt yuv420p ";
         ss << "-vf \"vflip\" -an \"" << path << "\" ";
@@ -73,7 +77,7 @@ void Recorder::start(const std::string& path)
         }
         if (process.close())
         {
-            std::cout << "smth bad happend" << std::endl;
+            std::cout << "smth bad happened" << std::endl;
             return;
         }
         if (!includeAudio || !std::filesystem::exists(songFile))
@@ -91,8 +95,8 @@ void Recorder::start(const std::string& path)
             std::stringstream stream;
             stream << '"' << ffmpegPath << '"' << " -y -ss " << songOffset << " -i \"" << songFile
             << "\" -i \"" << path << "\" -t " << total_time << " -c:v copy ";
-            if (!extraAudioArgs.empty())
-                stream << extraAudioArgs << " ";
+            if (!settings.extraAudioArgs.empty())
+                stream << settings.extraAudioArgs << " ";
             stream << "-filter:a \"volume=1[0:a]";
             if (fadeIn && !isTestmode)
                 stream << ";[0:a]afade=t=in:d=2[0:a]";
@@ -173,7 +177,7 @@ void Recorder::handleRecording(gd::PlayLayer* play_layer, float dt) {
             afterEndExtraTime += dt;
             finishedLevel = true;
         }
-        auto frame_dt = 1. / static_cast<double>(fps);
+        auto frame_dt = 1. / static_cast<double>(settings.fps);
         auto time = play_layer->m_time + extraTime - lastFrameTime;
         if (time >= frame_dt) {
             gd::FMODAudioEngine::sharedEngine()->setBackgroundMusicTime(
@@ -184,5 +188,27 @@ void Recorder::handleRecording(gd::PlayLayer* play_layer, float dt) {
         }
     } else {
         stop();
+    }
+}
+
+void Recorder::saveRecorderSettings() {
+    auto file = fopen(".qbot\\recorderSettings.dat", "wb");
+    if (file) {
+        fwrite(&settings, sizeof(settings), 1, file);
+        fclose(file);
+    }
+}
+
+void Recorder::loadRecorderSettings() {
+    auto file = fopen(".qbot\\recorderSettings.dat", "rb");
+    if (file) {
+        fseek(file, 0, SEEK_END);
+        auto size = ftell(file);
+
+        if (size == sizeof(settings)) {
+            fseek(file, 0, SEEK_SET);
+            fread(&settings, sizeof(settings), 1, file);
+            fclose(file);
+        }
     }
 }

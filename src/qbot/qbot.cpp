@@ -6,8 +6,11 @@ namespace qBot
     float xpos;
     bool inLevel = false;
     bool accuracyFixEnabled = false;
+    bool checkpointFixEnabled = false;
     bool showStatusEnabled = false;
     bool fakeCheatIndicatorEnabled = false;
+
+    size_t index;
 
     bool p1ButtonPushed = false;
     bool p2ButtonPushed = false;
@@ -15,8 +18,13 @@ namespace qBot
     bool frameAdvanceEnabled = false;
     bool advanceOneFrame = false;
 
-    std::vector<std::tuple<bool, bool, float, float, float, float, float, float, double, double, bool, bool>> vanilaMacro;
-    std::vector<int> checkpoints;
+    std::vector<Click> macro;
+    std::vector<Checkpoint> checkpoints;
+    std::vector<nfdchar_t*> sequence;
+
+    bool playingSequence = false;
+    int sequenceIndex = 0;
+
     std::string levelName = "";
 
     std::string getStatusText()
@@ -27,9 +35,9 @@ namespace qBot
         case 1:
             ss << "Recording: " << frame;
             break;
-        
+
         case 2:
-            ss << "Playing: " << frame + 1 << "/" << vanilaMacro.size();
+            ss << "Playing: " << index << "/" << macro.size() - 1;
             break;
 
         default:
@@ -68,23 +76,6 @@ namespace qBot
 
         if (GUI::mode == 1)
         {
-            if (frame != 0)
-            {
-                vanilaMacro.push_back({
-                p1ButtonPushed,
-                p2ButtonPushed,
-                self->m_pPlayer1->getPositionX(),
-                self->m_pPlayer2->getPositionX(),
-                self->m_pPlayer1->getPositionY(),
-                self->m_pPlayer2->getPositionY(),
-                self->m_pPlayer1->getRotation(),
-                self->m_pPlayer2->getRotation(),
-                self->m_pPlayer1->m_yAccel,
-                self->m_pPlayer2->m_yAccel,
-                self->m_pPlayer1->unk5FE,
-                self->m_pPlayer2->unk5FE,
-                });
-            }
             if (showStatusEnabled)
             {
                 statusText->setString(getStatusText().c_str());
@@ -98,65 +89,69 @@ namespace qBot
         
         if (GUI::mode == 2)
         {
-            
-            if (frame != 0 && vanilaMacro.size() > (size_t)frame && !self->m_isDead)
+            if (showStatusEnabled)
             {
-                if (std::get<0>(qBot::vanilaMacro[frame]) && !p1ButtonPushed) {
-                    Hooks::PlayLayer::pushButton(self, 0, true);
-                    p1ButtonPushed = true;
-                }
-                if (!std::get<0>(qBot::vanilaMacro[frame]) && p1ButtonPushed) {
-                    Hooks::PlayLayer::releaseButton(self, 0, true);
-                    p1ButtonPushed = false;
-                }
-                if (accuracyFixEnabled)
-                {
-                    self->m_pPlayer1->setPositionX(std::get<2>(qBot::vanilaMacro[frame]));
-                    self->m_pPlayer1->setPositionY(std::get<4>(qBot::vanilaMacro[frame]));
-                    self->m_pPlayer1->setRotation(std::get<6>(qBot::vanilaMacro[frame]));
-                }
+                statusText->setString(getStatusText().c_str());
+                statusText->setVisible(true);
+                auto size = statusText->getScaledContentSize();
+                statusText->setPosition({ size.width / 2 + 3, size.height / 2 + 3});
+            } else {
+                statusText->setVisible(false);
+            }
 
-                if (std::get<1>(qBot::vanilaMacro[frame]) && !p2ButtonPushed) {
-                    Hooks::PlayLayer::pushButton(self, 0, false);
-                    p2ButtonPushed = true;
+            if (frame != 0 && !self->m_isDead)
+            {
+                for (size_t i = 0; i < macro.size(); i++) {
+                    while (macro[i].frame == frame)
+                    {
+                        index = i;
+                        if (macro[i].action)
+                        {
+                            std::cout << macro[i].xpos << std::endl;
+                            if (macro[i].xpos != -1 && qBot::accuracyFixEnabled)
+                            {
+                                self->m_pPlayer1->setPositionX(macro[i].xpos);
+                                self->m_pPlayer2->setPositionX(macro[i].xpos);
+                                self->m_pPlayer1->setPositionY(macro[i].ypos1);
+                                self->m_pPlayer2->setPositionY(macro[i].ypos2);
+                                self->m_pPlayer1->setRotation(macro[i].rotation1);
+                                self->m_pPlayer2->setRotation(macro[i].rotation2);
+                            }
+                            Hooks::PlayLayer::pushButton(self, 0, macro[i].player);
+                        } else {
+                            if (macro[i].xpos != -1 && qBot::accuracyFixEnabled)
+                            {
+                                self->m_pPlayer1->setPositionX(macro[i].xpos);
+                                self->m_pPlayer2->setPositionX(macro[i].xpos);
+                                self->m_pPlayer1->setPositionY(macro[i].ypos1);
+                                self->m_pPlayer2->setPositionY(macro[i].ypos2);
+                                self->m_pPlayer1->setRotation(macro[i].rotation1);
+                                self->m_pPlayer2->setRotation(macro[i].rotation2);
+                            }
+                            Hooks::PlayLayer::releaseButton(self, 0, macro[i].player);
+                        }
+                        break;
+                    }
                 }
-                if (!std::get<1>(qBot::vanilaMacro[frame]) && p2ButtonPushed) {
-                    Hooks::PlayLayer::releaseButton(self, 0, false);
-                    p2ButtonPushed = false;
-                }
-                
-                if (accuracyFixEnabled)
-                {
-                    self->m_pPlayer2->setPositionX(std::get<3>(qBot::vanilaMacro[frame]));
-                    self->m_pPlayer2->setPositionY(std::get<5>(qBot::vanilaMacro[frame]));
-                    self->m_pPlayer2->setRotation(std::get<7>(qBot::vanilaMacro[frame]));
-                }
-                
-
-                if (showStatusEnabled)
-                {
-                    statusText->setString(getStatusText().c_str());
-                    statusText->setVisible(true);
-                    auto size = statusText->getScaledContentSize();
-                    statusText->setPosition({ size.width / 2 + 3, size.height / 2 + 3});
-                } else {
-                    statusText->setVisible(false);
-                }
-
             }
         }
-
     }
 
     void PushButton(gd::PlayLayer* self, bool player)
     {
-        if (GUI::mode == 1)
+        if (GUI::mode == 1 && frame != 0)
         {
-            if (player)
+            if (qBot::accuracyFixEnabled)
             {
-                p1ButtonPushed = true;
+                macro.push_back({(int)FPSMultiplier::target_fps, frame,
+                                 self->m_pPlayer1->getPositionX(),
+                                 self->m_pPlayer1->getPositionY(),
+                                 self->m_pPlayer2->getPositionY(),
+                                 self->m_pPlayer1->getRotation(),
+                                 self->m_pPlayer2->getRotation(),
+                                 true, player});
             } else {
-                p2ButtonPushed = true;
+                macro.push_back({(int)FPSMultiplier::target_fps, frame, -1, -1, -1, -1, -1, true, player});
             }
         }
         
@@ -164,44 +159,65 @@ namespace qBot
 
     void ReleaseButton(gd::PlayLayer* self, bool player)
     {
-        if (GUI::mode == 1)
+        if (GUI::mode == 1 && frame != 0)
         {
-            if (player)
+            if (qBot::accuracyFixEnabled)
             {
-                p1ButtonPushed = false;
+                macro.push_back({(int)FPSMultiplier::target_fps, frame,
+                                 self->m_pPlayer1->getPositionX(),
+                                 self->m_pPlayer1->getPositionY(),
+                                 self->m_pPlayer2->getPositionY(),
+                                 self->m_pPlayer1->getRotation(),
+                                 self->m_pPlayer2->getRotation(),
+                                 false, player});
             } else {
-                p2ButtonPushed = false;
+                macro.push_back({(int)FPSMultiplier::target_fps, frame, -1, -1, -1, -1, -1, false, player});
             }
+
         }
     }
 
-    void PlaceCheckpoint()
+    void PlaceCheckpoint(gd::PlayLayer* self)
     {
-        checkpoints.push_back(frame);
-        
+        checkpoints.push_back({frame,
+                               self->m_pPlayer1->getPositionX(),
+                               self->m_pPlayer1->getPositionY(),
+                               self->m_pPlayer2->getPositionY(),
+                               self->m_pPlayer1->getRotation(),
+                               self->m_pPlayer2->getRotation(),
+                               self->m_pPlayer1->m_yAccel,
+                               self->m_pPlayer2->m_yAccel
+        });
     }
 
-    void RemoveCheckpoint()
+    void RemoveCheckpoint(gd::PlayLayer* self)
     {
         checkpoints.pop_back();
     }
 
     void Reset(gd::PlayLayer* self)
     {
-        if (!self->m_isPracticeMode && GUI::mode == 1)
+        index = 0;
+
+        if (self->m_isPracticeMode && checkpoints.size() != 0 && macro.size() != 0)
         {
-            vanilaMacro.clear();
-        }
-        
-        if (checkpoints.size() != 0 && vanilaMacro.size() != 0)
-        {
-            frame = checkpoints.back();
-            while (vanilaMacro.size() > (size_t)checkpoints.back())
+            frame = checkpoints.back().frame;
+            if (checkpointFixEnabled)
             {
-                vanilaMacro.pop_back();
+                self->m_pPlayer1->setPositionX(checkpoints.back().xpos);
+                self->m_pPlayer2->setPositionX(checkpoints.back().xpos);
+                self->m_pPlayer1->setPositionY(checkpoints.back().ypos1);
+                self->m_pPlayer2->setPositionY(checkpoints.back().ypos2);
+                self->m_pPlayer1->setRotation(checkpoints.back().rotation1);
+                self->m_pPlayer2->setRotation(checkpoints.back().rotation2);
+                self->m_pPlayer1->m_yAccel = checkpoints.back().yAccel1;
+                self->m_pPlayer2->m_yAccel = checkpoints.back().yAccel2;
+            }
+            while (macro.back().frame > checkpoints.back().frame)
+            {
+                macro.pop_back();
             }
         }
-        
     }
 
     void Init(gd::PlayLayer* self)
@@ -229,6 +245,7 @@ namespace qBot
 
     void Quit(gd::PlayLayer* self)
     {
+        index = 0;
         levelName = "";
         xpos = 0;
         frame = 0;

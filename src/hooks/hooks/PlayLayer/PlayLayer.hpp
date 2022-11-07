@@ -34,9 +34,9 @@ namespace Hooks::PlayLayer
     inline void(__thiscall* togglePractice)(void* self, bool practice);
     void __fastcall hkTogglePractice(void* self, int edx, bool practice);
     
-    inline int(__thiscall* createCheckpoint)(void* self);
-    int __fastcall hkCreateCheckpoint(void* self);
+    inline int(__thiscall* createCheckpoint)(gd::PlayLayer* self);
+    int __fastcall hkCreateCheckpoint(gd::PlayLayer* self);
     
-    inline int(__thiscall* removeCheckpoint)(void* self);
-    int __fastcall hkRemoveCheckpoint(void* self);
+    inline int(__thiscall* removeCheckpoint)(gd::PlayLayer* self);
+    int __fastcall hkRemoveCheckpoint(gd::PlayLayer* self);
 } // namespace PlayLayer

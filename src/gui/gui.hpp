@@ -1,5 +1,4 @@
 #pragma once
-#define SAMPLE std::tuple<bool, bool, float, float, float, float, float, float, double, double, bool, bool>
 #include <curl/curl.h>
 #include <includes.hpp>
 #include <fstream>
@@ -18,8 +17,11 @@ namespace GUI
     void initUI();
     void renderUI();
 
+    void loadMacro(nfdchar_t* outPath);
+
     extern bool visible;
     extern int mode;
+    extern int macroType;
 
     namespace MainWindow
     {
