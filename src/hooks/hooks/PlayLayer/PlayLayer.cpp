@@ -63,7 +63,6 @@ namespace Hooks::PlayLayer
 
     bool __fastcall hkPushButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
-        std::cout << "push button" << std::endl;
         qBot::PushButton(self, player);
         if (ignoreUserInputEnabled && GUI::mode == 2)
         {
@@ -78,7 +77,6 @@ namespace Hooks::PlayLayer
 
     bool __fastcall hkReleaseButton(gd::PlayLayer* self, uintptr_t, int state, bool player)
     {
-        std::cout << "release button" << std::endl;
         qBot::ReleaseButton(self, player);
         if (ignoreUserInputEnabled && GUI::mode == 2)
         {
@@ -88,7 +86,6 @@ namespace Hooks::PlayLayer
         {
             releaseButton(self, state, !player);
         }
-        
         return releaseButton(self, state, player);
     }
 

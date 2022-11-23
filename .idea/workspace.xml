@@ -12,41 +12,32 @@
   <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="qBot" targetName="uninstall" />
+      <config projectName="qBot" targetName="simpledom" />
+      <config projectName="qBot" targetName="filterkeydom" />
+      <config projectName="qBot" targetName="lookaheadparser" />
       <config projectName="qBot" targetName="imgui-hook" />
-      <config projectName="qBot" targetName="NightlyBuild" />
-      <config projectName="qBot" targetName="ContinuousMemCheck" />
+      <config projectName="qBot" targetName="simplewriter" />
       <config projectName="qBot" targetName="qBot" />
-      <config projectName="qBot" targetName="NightlyStart" />
-      <config projectName="qBot" targetName="nfd" />
+      <config projectName="qBot" targetName="capitalize" />
+      <config projectName="qBot" targetName="pretty" />
+      <config projectName="qBot" targetName="sortkeys" />
       <config projectName="qBot" targetName="curl" />
-      <config projectName="qBot" targetName="ExperimentalBuild" />
-      <config projectName="qBot" targetName="NightlyCoverage" />
       <config projectName="qBot" targetName="minhook" />
-      <config projectName="qBot" targetName="ContinuousSubmit" />
-      <config projectName="qBot" targetName="ContinuousTest" />
-      <config projectName="qBot" targetName="Continuous" />
-      <config projectName="qBot" targetName="ContinuousConfigure" />
-      <config projectName="qBot" targetName="ExperimentalMemCheck" />
-      <config projectName="qBot" targetName="NightlyMemoryCheck" />
+      <config projectName="qBot" targetName="tutorial" />
+      <config projectName="qBot" targetName="jsonx" />
+      <config projectName="qBot" targetName="simplereader" />
+      <config projectName="qBot" targetName="filterkey" />
+      <config projectName="qBot" targetName="messagereader" />
       <config projectName="qBot" targetName="libcurl" />
-      <config projectName="qBot" targetName="ContinuousStart" />
-      <config projectName="qBot" targetName="NightlyConfigure" />
-      <config projectName="qBot" targetName="ContinuousBuild" />
-      <config projectName="qBot" targetName="Nightly" />
-      <config projectName="qBot" targetName="NightlySubmit" />
-      <config projectName="qBot" targetName="ExperimentalStart" />
-      <config projectName="qBot" targetName="NightlyUpdate" />
-      <config projectName="qBot" targetName="ContinuousUpdate" />
-      <config projectName="qBot" targetName="ExperimentalUpdate" />
-      <config projectName="qBot" targetName="ExperimentalCoverage" />
-      <config projectName="qBot" targetName="NightlyMemCheck" />
-      <config projectName="qBot" targetName="Experimental" />
-      <config projectName="qBot" targetName="ExperimentalConfigure" />
-      <config projectName="qBot" targetName="NightlyTest" />
-      <config projectName="qBot" targetName="ContinuousCoverage" />
-      <config projectName="qBot" targetName="ExperimentalSubmit" />
-      <config projectName="qBot" targetName="ExperimentalTest" />
-      <config projectName="qBot" targetName="7zpp" />
+      <config projectName="qBot" targetName="condense" />
+      <config projectName="qBot" targetName="serialize" />
+      <config projectName="qBot" targetName="examples" />
+      <config projectName="qBot" targetName="archivertest" />
+      <config projectName="qBot" targetName="prettyauto" />
+      <config projectName="qBot" targetName="parsebyparts" />
+      <config projectName="qBot" targetName="schemavalidator" />
+      <config projectName="qBot" targetName="travis_doc" />
+      <config projectName="qBot" targetName="simplepullreader" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -57,24 +48,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1cdce29-fae9-4e72-921c-2ecdf5716d47" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/qBot.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/imguiExt/imguiExt.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/imguiExt/imguiExt.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/rapidjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/rapidjson/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/misctest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/perftest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/perftest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/platformtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/rapidjsontest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/perftest/schematest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/allocatorstest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/bigintegertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/clzlltest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/cursorstreamwrappertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/documenttest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/dtoatest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/encodedstreamtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/encodingstest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/filestreamtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/fwdtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/istreamwrappertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/itoatest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/jsoncheckertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/namespacetest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/ostreamwrappertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/platformtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/pointertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/prettywritertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/readertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/regextest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/schematest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/simdtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/strfunctest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/stringbuffertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/strtodtest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/unittest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/unittest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/uritest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/valuetest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/unittest/writertest.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/rapidjson/test/valgrind.supp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/dllmain.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/gui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/gui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/gui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/gui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/hooks/PlayLayer/PlayLayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/hooks/PlayLayer/PlayLayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/hooks/PlayLayer/PlayLayer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/hooks/PlayLayer/PlayLayer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/includes.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/includes.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/qbot/qbot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/qbot/qbot.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/qbot/qbot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/qbot/qbot.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/recorder/recorder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/recorder/recorder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/recorder/recorder.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/recorder/recorder.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +117,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -112,156 +141,33 @@
     &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;ctest.advertisement.all.test.configuration.is.created&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/asimo/Desktop/qBot-2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;ObjectiveC&quot;
+    ]
   }
 }</component>
   <component name="RunManager" selected="CMake Application.qBot">
-    <configuration name="7zpp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="7zpp" CONFIG_NAME="Release">
+    <configuration name="archivertest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="archivertest" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="archivertest">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Continuous" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="Continuous" CONFIG_NAME="Release">
+    <configuration name="capitalize" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="capitalize" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="capitalize">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ContinuousBuild" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousBuild" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousConfigure" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousConfigure" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousCoverage" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousCoverage" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousMemCheck" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousMemCheck" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousStart" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousStart" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousSubmit" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousSubmit" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousTest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousTest" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ContinuousUpdate" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ContinuousUpdate" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Experimental" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="Experimental" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalBuild" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalBuild" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalConfigure" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalConfigure" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalCoverage" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalCoverage" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalMemCheck" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalMemCheck" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalStart" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalStart" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalSubmit" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalSubmit" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalTest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalTest" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExperimentalUpdate" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="ExperimentalUpdate" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Nightly" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="Nightly" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyBuild" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyBuild" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyConfigure" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyConfigure" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyCoverage" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyCoverage" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyMemCheck" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyMemCheck" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyMemoryCheck" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyMemoryCheck" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyStart" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyStart" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlySubmit" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlySubmit" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyTest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyTest" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NightlyUpdate" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="NightlyUpdate" CONFIG_NAME="Release">
+    <configuration name="condense" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="condense" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="condense">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -271,7 +177,27 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="examples" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="examples" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="filterkey" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="filterkey" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="filterkey">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="filterkeydom" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="filterkeydom" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="filterkeydom">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="imgui-hook" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="imgui-hook" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="jsonx" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="jsonx" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="jsonx">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -281,12 +207,32 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="lookaheadparser" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="lookaheadparser" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="lookaheadparser">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="messagereader" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="messagereader" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="messagereader">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="minhook" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="minhook" CONFIG_NAME="Release">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="nfd" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="nfd" CONFIG_NAME="Release">
+    <configuration name="parsebyparts" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="parsebyparts" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="parsebyparts">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="pretty" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="pretty" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="pretty">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="prettyauto" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="prettyauto" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="prettyauto">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -296,48 +242,91 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="schemavalidator" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="schemavalidator" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="schemavalidator">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="serialize" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="serialize" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="serialize">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simpledom" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="simpledom" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="simpledom">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simplepullreader" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="simplepullreader" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="simplepullreader">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simplereader" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="simplereader" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="simplereader">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simplewriter" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="simplewriter" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="simplewriter">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sortkeys" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="sortkeys" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="sortkeys">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="travis_doc" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="travis_doc" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tutorial" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="tutorial" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="qBot" RUN_TARGET_NAME="tutorial">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="uninstall" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qBot" TARGET_NAME="uninstall" CONFIG_NAME="Release">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All CTest" type="CTestRunConfiguration" factoryName="CTestRun" PROGRAM_PARAMS="--extra-verbose" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$CMakeCurrentLocalGenerationDir$" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Release" RUN_PATH="$CTestCurrentExecutableName$" EXPLICIT_BUILD_TARGET_NAME="all" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="CMake Application.qBot" />
-      <item itemvalue="CMake Application.7zpp" />
-      <item itemvalue="CMake Application.Continuous" />
-      <item itemvalue="CMake Application.ContinuousBuild" />
-      <item itemvalue="CMake Application.ContinuousConfigure" />
-      <item itemvalue="CMake Application.ContinuousCoverage" />
-      <item itemvalue="CMake Application.ContinuousMemCheck" />
-      <item itemvalue="CMake Application.ContinuousStart" />
-      <item itemvalue="CMake Application.ContinuousSubmit" />
-      <item itemvalue="CMake Application.ContinuousTest" />
-      <item itemvalue="CMake Application.ContinuousUpdate" />
-      <item itemvalue="CMake Application.Experimental" />
-      <item itemvalue="CMake Application.ExperimentalBuild" />
-      <item itemvalue="CMake Application.ExperimentalConfigure" />
-      <item itemvalue="CMake Application.ExperimentalCoverage" />
-      <item itemvalue="CMake Application.ExperimentalMemCheck" />
-      <item itemvalue="CMake Application.ExperimentalStart" />
-      <item itemvalue="CMake Application.ExperimentalSubmit" />
-      <item itemvalue="CMake Application.ExperimentalTest" />
-      <item itemvalue="CMake Application.ExperimentalUpdate" />
-      <item itemvalue="CMake Application.Nightly" />
-      <item itemvalue="CMake Application.NightlyBuild" />
-      <item itemvalue="CMake Application.NightlyConfigure" />
-      <item itemvalue="CMake Application.NightlyCoverage" />
-      <item itemvalue="CMake Application.NightlyMemCheck" />
-      <item itemvalue="CMake Application.NightlyMemoryCheck" />
-      <item itemvalue="CMake Application.NightlyStart" />
-      <item itemvalue="CMake Application.NightlySubmit" />
-      <item itemvalue="CMake Application.NightlyTest" />
-      <item itemvalue="CMake Application.NightlyUpdate" />
       <item itemvalue="CMake Application.uninstall" />
       <item itemvalue="CMake Application.libcurl" />
       <item itemvalue="CMake Application.curl" />
       <item itemvalue="CMake Application.imgui-hook" />
       <item itemvalue="CMake Application.minhook" />
-      <item itemvalue="CMake Application.nfd" />
+      <item itemvalue="CMake Application.travis_doc" />
+      <item itemvalue="CMake Application.archivertest" />
+      <item itemvalue="CMake Application.capitalize" />
+      <item itemvalue="CMake Application.condense" />
+      <item itemvalue="CMake Application.examples" />
+      <item itemvalue="CMake Application.filterkey" />
+      <item itemvalue="CMake Application.filterkeydom" />
+      <item itemvalue="CMake Application.jsonx" />
+      <item itemvalue="CMake Application.lookaheadparser" />
+      <item itemvalue="CMake Application.messagereader" />
+      <item itemvalue="CMake Application.parsebyparts" />
+      <item itemvalue="CMake Application.pretty" />
+      <item itemvalue="CMake Application.prettyauto" />
+      <item itemvalue="CMake Application.schemavalidator" />
+      <item itemvalue="CMake Application.serialize" />
+      <item itemvalue="CMake Application.simpledom" />
+      <item itemvalue="CMake Application.simplepullreader" />
+      <item itemvalue="CMake Application.simplereader" />
+      <item itemvalue="CMake Application.simplewriter" />
+      <item itemvalue="CMake Application.sortkeys" />
+      <item itemvalue="CMake Application.tutorial" />
+      <item itemvalue="CTest Application.All CTest" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -368,6 +357,23 @@
       <workItem from="1667750784905" duration="1240000" />
       <workItem from="1667823401461" duration="168000" />
       <workItem from="1667823581327" duration="3916000" />
+      <workItem from="1667997565196" duration="1404000" />
+      <workItem from="1668009448353" duration="5000" />
+      <workItem from="1668084461573" duration="2210000" />
+      <workItem from="1668089690955" duration="6000" />
+      <workItem from="1668090804699" duration="5000" />
+      <workItem from="1668164864977" duration="6437000" />
+      <workItem from="1668182361393" duration="5155000" />
+      <workItem from="1668225166203" duration="3280000" />
+      <workItem from="1668236837326" duration="3281000" />
+      <workItem from="1668247482703" duration="2943000" />
+      <workItem from="1668258905302" duration="17000" />
+      <workItem from="1668259047167" duration="22000" />
+      <workItem from="1668265007077" duration="1514000" />
+      <workItem from="1668311689587" duration="1603000" />
+      <workItem from="1668920308501" duration="4936000" />
+      <workItem from="1668931409247" duration="4000" />
+      <workItem from="1668931648954" duration="3847000" />
     </task>
     <servers />
   </component>

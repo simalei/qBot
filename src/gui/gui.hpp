@@ -2,13 +2,13 @@
 #include <curl/curl.h>
 #include <includes.hpp>
 #include <fstream>
-#include <7zpp.h>
 #include <misc/cpp/imgui_stdlib.h>
 #include "../qbot/qbot.hpp"
 #include "../hooks/hooks/Speedhack/Speedhack.hpp"
 #include "../hooks/hooks/FPSBypass/FPSBypass.hpp"
 #include "../hooks/hooks/CCScheduler/CCScheduler.hpp"
 #include "../recorder/recorder.hpp"
+#include "../imguiExt/imguiExt.hpp"
 #include <thread>
 #include <string>
 
@@ -17,11 +17,11 @@ namespace GUI
     void initUI();
     void renderUI();
 
-    void loadMacro(nfdchar_t* outPath);
+    void loadMacro(std::string outPath);
 
     extern bool visible;
     extern int mode;
-    extern int macroType;
+    extern std::string macroFilename;
 
     namespace MainWindow
     {

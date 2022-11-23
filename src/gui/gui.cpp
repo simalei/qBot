@@ -13,13 +13,14 @@ namespace GUI {
     bool demoWindow = false;
     int mode = 0;
     int frameOffset;
+    std::string macroFilename;
+    std::string videoPath;
     bool isAccuracyFixMacro;
     std::string convertedMacro;
     auto& rec = Recorder::get();
-    std::vector<Click> buffer;
-
-
-
+    int macroSelected;
+    std::vector<std::string> macros;
+    static float tempFps = 60.f;
 
     std::string getID()
     {
@@ -35,8 +36,6 @@ namespace GUI {
     }
 
     std::string id = getID();
-    nfdfilteritem_t filter[] = { { "qBot frame replay", "qbf" } };
-    nfdfilteritem_t plainTextFilter[] = { { "Text file", "txt" } };
 
     bool tobyadd = false;
 
@@ -54,21 +53,29 @@ namespace GUI {
         out.push_back(s.substr(beg));
     }
 
-    std::string convertToPlainText(std::vector<Click> macro, int frameOffset = 0)
+    std::string getFilenameFromFullPath(std::string s)
     {
+        std::string fileName;
+        int i;
+        for(i = s.length(); (s[i] != '\\') && (s[i] != '/') && i >= 0; --i)
+            ;
+        while (s[++i] != '\0')
+            fileName += s[i];
+        return fileName;
+    }
+    std::string convertToPlainText(std::vector<Click> macro, int frameOffset = 0) {
         if (macro.size() == 0)
             return "";
-        if (macro[0].xpos != -1)
-        {
-            ImGui::InsertNotification({ ImGuiToastType_Warning, 3000, "Macro has accuracy fix data. After applying changes, this data will be deleted!"});
+        if (macro[0].xpos != -1) {
+            //ImGui::InsertNotification({ImGuiToastType_Warning, 3000,
+                                       //"Macro has accuracy fix data. After applying changes, this data will be deleted!"});
         }
         std::stringstream ss;
         ss << macro[0].fps << "\n";
         for (int i = 0; i < macro.size(); ++i) {
             ss << macro[i].frame + frameOffset;
             std::string action;
-            if (macro[i].player)
-            {
+            if (macro[i].player) {
                 ss << (macro[i].action ? " 1" : " 0") << " 0\n";
             } else {
                 ss << " 0 " << (macro[i].action ? "1" : "0") << "\n";
@@ -120,6 +127,30 @@ namespace GUI {
         }
     }
 
+    void convertFromTASBOTJson(std::ifstream& is)
+    {
+        qBot::macro.clear();
+        int fps;
+
+        rapidjson::Document d;
+        rapidjson::IStreamWrapper isw(is);
+        d.ParseStream(isw);
+        fps = d["fps"].GetFloat();
+        for (const auto& Action : d["macro"].GetArray())
+        {
+            uint32_t frame = Action["frame"].GetUint();
+
+            bool IsHolding = Action["player_1"]["click"] == 1;
+            bool IsPlayer2Holding = Action["player_2"]["click"] == 1;
+
+            if (bool IsPlayer = Action["player_1"]["click"] != 0)
+                qBot::macro.push_back({fps, (int)frame, -1, -1, -1, -1, -1, IsHolding, IsPlayer});
+
+            if (bool IsPlayer2 = Action["player_2"]["click"] != 0)
+                qBot::macro.push_back({fps, (int)frame, -1, -1, -1, -1, -1, IsPlayer2Holding, IsPlayer2});
+        }
+    }
+
     size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string* data) {
         data->append((char*) ptr, size * nmemb);
         return size * nmemb;
@@ -133,23 +164,21 @@ namespace GUI {
         return("");
     }
 
-    void saveMacro(nfdchar_t* outPath)
+    void saveMacro(std::string outPath)
     {
         std::ofstream out(outPath, std::ios::binary);
         out.write((char*)qBot::macro.data(),sizeof(Click)*qBot::macro.size());
         GUI::mode = 0;
     }
 
-    void loadMacro(nfdchar_t* outPath)
+    void loadMacro(std::string outPath)
     {
-
         std::ifstream in(outPath, std::ios::binary);
         size_t count = in.seekg(0, std::ios::end).tellg()/sizeof(Click);
         qBot::macro.resize(count);
         in.seekg(0);
         in.read((char*)qBot::macro.data(),sizeof(Click)*count);
         GUI::mode = 2;
-
     }
     namespace LoginWindow
     {
@@ -192,13 +221,13 @@ namespace GUI {
             }
             if (response == "-1")
             {
-                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Logging in failed. Check your username, password and internet connection."});
+                //ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Logging in failed. Check your username, password and internet connection."});
                 return;
             }
             
             if (response == id)
             {
-                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Logged in successfully."});
+                //ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Logged in successfully."});
                 if (loginStruct.rememberCredentials)
                 {
                     auto file = fopen(".qbot\\licenseData.dat", "wb");
@@ -211,7 +240,7 @@ namespace GUI {
                 tobyadd = true;
                 return;
             } else {
-                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "HWID do not match"});
+                //ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "HWID doesn't match"});
                 return;
             }
         }
@@ -233,9 +262,9 @@ namespace GUI {
             }
             if (response == "1")
             {
-                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Registred succesfully. Thanks for purchasing qBot!"});
+                //ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Registred succesfully. Thanks for purchasing qBot!"});
             } else {
-                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Registration failed. Check your license key and internet connection."});
+                //ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Registration failed. Check your license key and internet connection."});
             }
             return;
         }
@@ -272,7 +301,7 @@ namespace GUI {
                     {
                         registerFunc();
                     } else {
-                        ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Passwords do not match"});
+                        //ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Passwords do not match"});
                     }
                     
                 }
@@ -324,33 +353,46 @@ namespace GUI {
                     ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%f", qBot::xpos);
 
                     ImGui::Separator();
-                    
-                    if (ImGui::Button("Save macro", buttonSize))
+
+                    // text input for macro filename
+                    ImGui::PushItemWidth(ImGui::GetWindowWidth() - 17);
+
+                    ImGuiExt::ComboWithFilter("##macro", &macroSelected, macros);
+
+                    if (ImGui::Button("Save", {buttonSize.x / 2, buttonSize.y}))
                     {
-                        nfdchar_t *outPath;
-                        nfdresult_t result = NFD_SaveDialogU8(&outPath, filter, 2, ".qbot\\replays", qBot::levelName.c_str());
-                        if (result == NFD_OKAY)
-                        {
-                            saveMacro(outPath);
-                            ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully saved to %s", outPath});
-                        }
+                        saveMacro(std::filesystem::current_path().string() + "\\.qbot\\replays\\" + macroFilename + ".qbf");
+                        std::cout << std::filesystem::current_path().string() + "\\.qbot\\replays\\" + macroFilename + ".qbf" << std::endl;
+                        //ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully saved to %s", (macroFilename + ".qbf").c_str()});
                     }
-                    
-                    if (ImGui::Button("Load macro", buttonSize))
+
+                    ImGui::SameLine();
+
+                    if (ImGui::Button("Load", {buttonSize.x / 2 - 5, buttonSize.y}))
                     {
-                        nfdchar_t *outPath;
-                        nfdresult_t result = NFD_OpenDialogU8(&outPath, filter, 2, ".qbot\\replays");
-                        if (result == NFD_OKAY)
+                        std::cout << std::filesystem::current_path().string() + "\\.qbot\\replays\\" + macros[macroSelected] << std::endl;
+                        if (std::filesystem::exists(std::filesystem::current_path().string() + "\\.qbot\\replays\\" + macroFilename + ".qbf"))
                         {
                             qBot::macro.clear();
-                            loadMacro(outPath);
+                            loadMacro(std::filesystem::current_path().string() + "\\.qbot\\replays\\" + macros[macroSelected]);
+                            tempFps = qBot::macro[0].fps;
                             FPSBypass::target_fps = qBot::macro[0].fps;
                             FPSBypass::setFPS();
-                            ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay %s successfully loaded", outPath});
+                            //ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully loaded from %s", (macroFilename + ".qbf").c_str()});
                         }
                     }
-                    
-                    if (ImGui::Button("Clear macro", buttonSize))
+
+                    if (ImGui::Button("Refresh macro list", buttonSize))
+                    {
+                        macros.clear();
+                        macroSelected = 0;
+                        for (auto& p : std::filesystem::directory_iterator(std::filesystem::current_path().string() + "\\.qbot\\replays\\"))
+                        {
+                            macros.push_back(getFilenameFromFullPath(p.path().string()));
+                        }
+                    }
+
+                    if (ImGui::Button("Clear", buttonSize))
                     {
                         qBot::macro.clear();
                     }
@@ -359,17 +401,24 @@ namespace GUI {
                     {
                         ImGui::OpenPopup("ImportExportPopup");
                     }
+
+
                     if (ImGui::BeginPopup("ImportExportPopup"))
                     {
-                        if (ImGui::Button("Import from plain text"))
+                        ImGui::Text("Import...");
+                        if (ImGui::Button("Plain Text"))
                         {
-                            nfdchar_t *outPath;
-                            nfdresult_t result = NFD_OpenDialogU8(&outPath, plainTextFilter, 1, ".qbot\\replays");
-                            if (result == NFD_OKAY)
-                            {
+                            OPENFILENAME ofn;
+                            char fileName[MAX_PATH] = "";
+                            ZeroMemory(&ofn, sizeof(ofn));
+                            ofn.lpstrFilter = "Plain Text (*.txt)\0*.txt";
+                            ofn.lStructSize = sizeof(OPENFILENAME);
+                            ofn.lpstrFile = fileName;
+                            ofn.nMaxFile = MAX_PATH;
+                            if (GetOpenFileName(&ofn)) {
                                 std::stringstream ss;
                                 std::string line;
-                                std::ifstream in(outPath);
+                                std::ifstream in((std::string(fileName) + ".txt").c_str());
                                 if (in.is_open())
                                 {
                                     while (getline(in, line))
@@ -382,21 +431,43 @@ namespace GUI {
                                 convertFromPlainText(ss.str());
                             }
                         }
-                        ImGui::Separator();
-                        if (ImGui::Button("Export as plain text"))
+                        /*
+                        if (ImGui::Button("TASBOT JSON"))
                         {
-                            nfdchar_t *outPath;
-                            nfdresult_t result = NFD_SaveDialogU8(&outPath, plainTextFilter, 1, ".qbot\\replays", qBot::levelName.c_str());
-                            if (result == NFD_OKAY)
-                            {
+                            OPENFILENAME ofn;
+                            char fileName[MAX_PATH] = "";
+                            ZeroMemory(&ofn, sizeof(ofn));
+                            ofn.lpstrFilter = "JSON (*.json)\0*.json";
+                            ofn.lStructSize = sizeof(OPENFILENAME);
+                            ofn.lpstrFile = fileName;
+                            ofn.nMaxFile = MAX_PATH;
+                            if (GetOpenFileName(&ofn)) {
+                                std::ifstream is;
+                                is.open(fileName, std::ifstream::in);
+                                convertFromTASBOTJson(is);
+                            }
+                        }
+                        */
+                        ImGui::Separator();
+                        ImGui::Text("Export...");
+                        if (ImGui::Button("Plain text"))
+                        {
+                            OPENFILENAME ofn;
+                            char fileName[MAX_PATH] = "";
+                            ZeroMemory(&ofn, sizeof(ofn));
+                            ofn.lpstrFilter = "Plain Text (*.txt)\0*.txt";
+                            ofn.lStructSize = sizeof(OPENFILENAME);
+                            ofn.lpstrFile = fileName;
+                            ofn.nMaxFile = MAX_PATH;
+                            if (GetSaveFileName(&ofn)) {
                                 std::ofstream out;
-                                out.open(outPath);
+                                out.open(std::string(fileName));
                                 if (out.is_open())
                                 {
                                     out << convertToPlainText(qBot::macro);
                                 }
                                 out.close();
-                                ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully exported to %s", outPath});
+                                //ImGui::InsertNotification({ ImGuiToastType_Success, 3000, "Replay successfully exported to %s", std::string(fileName).c_str()});
                             }
                         }
 
@@ -416,9 +487,10 @@ namespace GUI {
                     ImGui::Separator();
 
                     ImGui::Text("FPS Bypass");
-                    ImGui::InputFloat("FPS", &FPSBypass::target_fps, 10);
+                    ImGui::InputFloat("FPS", &tempFps, 10);
                     if (ImGui::Button("Apply FPS", buttonSize))
                     {
+                        FPSBypass::target_fps = tempFps;
                         FPSBypass::setFPS();
                     }
 
@@ -434,6 +506,7 @@ namespace GUI {
                 }
                 if (ImGui::BeginTabItem("Video"))
                 {
+                    ImGui::InputText("Name", &videoPath);
                     ImGui::InputInt("Width", &settings.width);
                     ImGui::InputInt("Height", &settings.height);
                     ImGui::InputInt("FPS", &settings.fps);
@@ -499,15 +572,10 @@ namespace GUI {
                         {
                             if (qBot::inLevel)
                             {
-                                nfdchar_t* path = nullptr;
-                                nfdfilteritem_t recorderFilter[] = { {"Video file", "mp4"} };
-                                if (NFD_SaveDialogU8(&path, recorderFilter, 1, ".qbot\\videos", qBot::levelName.c_str()) == NFD_OKAY)
-                                {
-                                    rec.lastFrameTime = 0;
-                                    rec.start(path);
-                                }   
+                                rec.lastFrameTime = 0;
+                                rec.start((videoPath + ".mp4").c_str());
                             } else {
-                                ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Recording can be started only if you're in level"});
+                                //ImGui::InsertNotification({ ImGuiToastType_Error, 3000, "Recording can be started only if you're in level"});
                             }
                         }
                     } else {
@@ -527,9 +595,7 @@ namespace GUI {
                     ImGui::Checkbox("Show status", &qBot::showStatusEnabled);
                     ImGui::Checkbox("Fake cheat indicator", &qBot::fakeCheatIndicatorEnabled);
                     ImGui::Checkbox("Checkpoint fix", &qBot::checkpointFixEnabled);
-                    
                     ImGui::EndTabItem();
-
                 }
 
                 if (ImGui::BeginTabItem("About"))
@@ -540,7 +606,7 @@ namespace GUI {
 
                     ImGui::Text("qBot version:");
                     ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "v0.4-beta");
+                    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "v0.4.1");
 
                     ImGui::Text("ImGui version:");
                     ImGui::SameLine();
@@ -560,6 +626,7 @@ namespace GUI {
                 }
                 ImGui::EndTabBar();
             }
+
             if (macroEditor)
             {
                 ImGui::Begin("Macro editor", nullptr,  macroEditorFlags);
@@ -616,7 +683,7 @@ namespace GUI {
         {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 7.f);
             ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.10f, 0.10f, 0.10f, 1.00f));
-            ImGui::RenderNotifications();
+            //ImGui::RenderNotifications();
             ImGui::PopStyleVar(1); // Don't forget to Pop()
             ImGui::PopStyleColor(1);
         }
@@ -638,11 +705,16 @@ namespace GUI {
         }
         LoginWindow::loginFunc();
 
+        macros.clear();
+        for (auto& p : std::filesystem::directory_iterator(std::filesystem::current_path().string() + "\\.qbot\\replays\\"))
+        {
+            macros.push_back(getFilenameFromFullPath(p.path().string()));
+        }
         ImGuiIO* io = &ImGui::GetIO();
         ImFontConfig font_cfg;
         font_cfg.FontDataOwnedByAtlas = false;
-        io->Fonts->AddFontFromMemoryTTF((void*)tahoma, sizeof(tahoma), 17.f, &font_cfg);
-        ImGui::MergeIconsWithLatestFont(16.f, false);
+        //io->Fonts->AddFontFromMemoryTTF((void*)tahoma, sizeof(tahoma), 17.f, &font_cfg);
+        //ImGui::MergeIconsWithLatestFont(16.f, false);
         ImVec4* colors = ImGui::GetStyle().Colors;
         colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
         colors[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
@@ -729,7 +801,7 @@ namespace GUI {
 
     void renderUI()
     {
-        GUI::Notifications::render();
+
         if (IsDebuggerPresent())
         {
             exit(-1);
@@ -744,10 +816,10 @@ namespace GUI {
             if (tobyadd)
             {
                 GUI::MainWindow::render();
-                FPSBypass::setFPS();
             } else {
                 GUI::LoginWindow::render();
             }
         }
+        GUI::Notifications::render();
     }
 } // namespace GUI

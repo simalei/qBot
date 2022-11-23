@@ -1,7 +1,7 @@
 #ifndef __INCLUDES_HPP
 
 #define __INCLUDES_HPP
-
+#define IMGUI_DEFINE_MATH_OPERATORS
 #ifdef _MSC_VER
 #pragma warning(disable: 4251) // shut up cocos
 #pragma warning( push )
@@ -24,22 +24,10 @@
 #include <imgui.h>
 #include <imgui-hook.hpp>
 
-// Native File Dialog
-#include <nfd.hpp>
-
-// ImGui Notify
-#include <imgui_notify.h>
-#include <tahoma.h>
-
 // Rapidjson
-/*
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/istreamwrapper.h>
-*/
-
-// ClipboardXX
-#include <clipboardxx.hpp>
 
 using namespace cocos2d;
 #pragma warning( pop )

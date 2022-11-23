@@ -20,7 +20,6 @@ namespace qBot
 
     std::vector<Click> macro;
     std::vector<Checkpoint> checkpoints;
-    std::vector<nfdchar_t*> sequence;
 
     bool playingSequence = false;
     int sequenceIndex = 0;
@@ -37,7 +36,7 @@ namespace qBot
             break;
 
         case 2:
-            ss << "Playing: " << index << "/" << macro.size() - 1;
+            ss << "Playing: " << index + 1 << "/" << macro.size();
             break;
 
         default:
@@ -71,10 +70,7 @@ namespace qBot
         if (GUI::mode == 0)
         {
             statusText->setVisible(false);
-        }
-        
-
-        if (GUI::mode == 1)
+        } else if (GUI::mode == 1)
         {
             if (showStatusEnabled)
             {
@@ -85,9 +81,7 @@ namespace qBot
             } else {
                 statusText->setVisible(false);
             }
-        }
-        
-        if (GUI::mode == 2)
+        } else if (GUI::mode == 2)
         {
             if (showStatusEnabled)
             {
@@ -101,7 +95,7 @@ namespace qBot
 
             if (frame != 0 && !self->m_isDead)
             {
-                for (size_t i = 0; i < macro.size(); i++) {
+                for (size_t i = 0; i <= macro.size(); i++) {
                     while (macro[i].frame == frame)
                     {
                         index = i;
@@ -173,7 +167,6 @@ namespace qBot
             } else {
                 macro.push_back({(int)FPSMultiplier::target_fps, frame, -1, -1, -1, -1, -1, false, player});
             }
-
         }
     }
 
@@ -197,8 +190,6 @@ namespace qBot
 
     void Reset(gd::PlayLayer* self)
     {
-        index = 0;
-
         if (self->m_isPracticeMode && checkpoints.size() != 0 && macro.size() != 0)
         {
             frame = checkpoints.back().frame;
@@ -213,7 +204,7 @@ namespace qBot
                 self->m_pPlayer1->m_yAccel = checkpoints.back().yAccel1;
                 self->m_pPlayer2->m_yAccel = checkpoints.back().yAccel2;
             }
-            while (macro.back().frame > checkpoints.back().frame)
+            while (macro.back().frame > frame)
             {
                 macro.pop_back();
             }
@@ -222,7 +213,7 @@ namespace qBot
 
     void Init(gd::PlayLayer* self)
     {
-        levelName = self->m_level->m_sLevelName;
+        GUI::macroFilename = self->m_level->m_sLevelName;
         inLevel = true;
         frame = 0;
         const auto winSize = CCDirector::sharedDirector()->getWinSize();

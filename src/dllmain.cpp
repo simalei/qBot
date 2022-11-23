@@ -15,8 +15,10 @@ DWORD MainThread(LPVOID lpParam)
     _mkdir(".qbot\\videos");
     _mkdir(".qbot\\replays");
     MH_Initialize();
-    NFD_Init();
 
+    AllocConsole();
+    SetConsoleTitleA("debugger");
+    freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
 
     ImGuiHook::setInitFunction(GUI::initUI);
     ImGuiHook::setRenderFunction(GUI::renderUI);

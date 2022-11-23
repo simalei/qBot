@@ -47,10 +47,7 @@ namespace qBot
     extern bool accuracyFixEnabled;
     extern bool checkpointFixEnabled;
     extern bool showStatusEnabled;
-    extern bool frameAdvanceEnabled;
-    extern bool advanceOneFrame;
     extern bool fakeCheatIndicatorEnabled;
-    extern std::string levelName;
 
     void Update(gd::PlayLayer* self);
     void Quit(gd::PlayLayer* self);
